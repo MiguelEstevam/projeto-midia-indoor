@@ -1,0 +1,195 @@
+/* Configuração básica */
+body {
+  font-family: 'Arial', sans-serif;
+  background-color: #74a9d8; /* Azul amigável */
+  color: #333;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+#root {
+  max-width: 400px;
+  margin: 0 auto;
+  padding: 2rem;
+  text-align: center;
+  background-color: #ffffff;
+  border-radius: 15px;
+  box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.logo {
+  height: 80px;
+  margin-bottom: 2rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.logo:hover {
+  transform: scale(1.1);
+}
+
+@keyframes logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .logo.react {
+    animation: logo-spin infinite 20s linear;
+  }
+}
+
+/* Estilo para o Card */
+.card {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+/* Estilo dos botões */
+button {
+  background-color: #357ABD; /* Azul amigável */
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1.1rem;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 1rem;
+}
+
+button:hover {
+  background-color: #2e6da4; /* Tom mais escuro para o hover */
+}
+
+button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #c9e0f3;
+}
+
+/* Estilo dos Inputs */
+input[type="email"],
+input[type="password"],
+input[type="text"],
+input[type="file"] {
+  width: 100%;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-sizing: border-box;
+  font-size: 1rem;
+  transition: border-color 0.3s ease-in-out;
+}
+
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="text"]:focus,
+input[type="file"]:focus {
+  border-color: #357ABD;
+  outline: none;
+}
+
+/* Estilo personalizado para o botão de upload de arquivo */
+input[type="file"] {
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+input[type="file"]::file-selector-button {
+  background-color: #357ABD;
+  color: white;
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+input[type="file"]::file-selector-button:hover {
+  background-color: #2e6da4;
+}
+
+input[type="file"]::file-selector-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #c9e0f3;
+}
+
+/* Links */
+a {
+  color: #357ABD;
+  text-decoration: none;
+  transition: color 0.3s ease-in-out;
+}
+
+a:hover {
+  color: #2e6da4;
+}
+
+/* Estilo do rodapé ou mensagens */
+.read-the-docs {
+  color: #888;
+  font-size: 0.875rem;
+  margin-top: 2rem;
+}
+
+/* Estilo para mensagem de erro */
+p {
+  color: red;
+  font-weight: bold;
+  margin-top: -1rem;
+  margin-bottom: 1rem;
+}
+
+/* Estilo para a lista de arquivos */
+.file-list-container {
+  padding: 2rem;
+  background-color: #ffffff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+}
+
+.file-list {
+  list-style-type: none;
+  padding: 0;
+}
+
+.file-list li {
+  margin-bottom: 1rem;
+}
+
+.file-link {
+  display: inline-block;
+  background-color: #0a0b0b;
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 5px;
+  text-decoration: none;
+  transition: background-color 0.3s ease-in-out;
+  font-weight: bold;
+}
+
+.file-link:hover {
+  background-color: #2e6da4;
+}
+
+.file-link:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px #c9e0f3;
+}
+
