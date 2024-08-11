@@ -8,17 +8,69 @@ body {
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh;
+  min-height: 100vh;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 #root {
-  max-width: 400px;
+  width: 100%;
+  max-width: 1000px; /* Aumentar a largura máxima para acomodar o layout horizontal */
   margin: 0 auto;
   padding: 2rem;
-  text-align: center;
   background-color: #ffffff;
   border-radius: 15px;
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
+  box-sizing: border-box; /* Garante que padding seja incluído na largura total */
+  overflow: hidden;
+}
+
+/* Layout horizontal para os componentes principais */
+.main-container {
+  display: flex;
+  flex-wrap: wrap; /* Permite que os elementos se ajustem se a tela for muito pequena */
+  justify-content: space-between; /* Espaçamento entre os componentes */
+  gap: 20px; /* Espaço entre os componentes */
+  box-sizing: border-box;
+}
+
+.card, .file-list-container {
+  padding: 2rem;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
+  flex: 1; /* Permite que os cards se expandam igualmente */
+  max-width: 48%; /* Limita a largura para cada card */
+  box-sizing: border-box;
+}
+
+button {
+  background-color: #357ABD; /* Azul amigável */
+  color: #fff;
+  border: none;
+  padding: 1rem 2rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+  font-size: 1.1rem;
+  width: 100%;
+  font-weight: bold;
+  margin-top: 1rem;
+  box-sizing: border-box;
+}
+
+/* Garantindo que os elementos não saiam da tela */
+h2 {
+  margin-top: 0; /* Remove margens superiores para evitar que saia da tela */
+}
+
+.main-container {
+  margin-bottom: 1rem; /* Adiciona espaçamento na parte inferior para evitar que elementos toquem as bordas */
+}
+
+/* Ajustes para garantir que o botão de logout e outros elementos não saiam da tela */
+button {
+  margin-bottom: 1rem; /* Adiciona um pouco de margem inferior */
 }
 
 .logo {
@@ -46,13 +98,21 @@ body {
   }
 }
 
-/* Estilo para o Card */
-.card {
+/* Layout horizontal para os componentes principais */
+.main-container {
+  display: flex;
+  justify-content: space-between; /* Espaçamento entre os componentes */
+  gap: 20px; /* Espaço entre os componentes */
+}
+
+/* Estilo para os cards */
+.card, .file-list-container {
   padding: 2rem;
   background-color: #fff;
   border-radius: 10px;
   box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  margin-bottom: 2rem;
+  flex: 1; /* Permite que os cards se expandam igualmente */
+  max-width: 48%; /* Limita a largura para cada card */
 }
 
 /* Estilo dos botões */
@@ -83,7 +143,8 @@ button:focus {
 input[type="email"],
 input[type="password"],
 input[type="text"],
-input[type="file"] {
+input[type="file"],
+textarea {
   width: 100%;
   padding: 1rem;
   margin-bottom: 1rem;
@@ -97,7 +158,8 @@ input[type="file"] {
 input[type="email"]:focus,
 input[type="password"]:focus,
 input[type="text"]:focus,
-input[type="file"]:focus {
+input[type="file"]:focus,
+textarea:focus {
   border-color: #357ABD;
   outline: none;
 }
@@ -157,13 +219,6 @@ p {
 }
 
 /* Estilo para a lista de arquivos */
-.file-list-container {
-  padding: 2rem;
-  background-color: #ffffff;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-}
-
 .file-list {
   list-style-type: none;
   padding: 0;
@@ -192,4 +247,3 @@ p {
   outline: none;
   box-shadow: 0 0 0 2px #c9e0f3;
 }
-
