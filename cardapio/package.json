@@ -8,7 +8,6 @@
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"
-    "proxy": "https://cardapio-api-two.vercel.app"
   },
   "dependencies": {
     "@ckeditor/ckeditor5-build-classic": "^43.0.0",
