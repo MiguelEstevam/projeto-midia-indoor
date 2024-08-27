@@ -15,27 +15,27 @@ const LoginPage = () => {
     try {
       const response = await fetch(API_URL + '/login', {
         method: 'POST',
-        mode: 'no-cors', // Configura o modo para 'no-cors'
         headers: {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ email, password }),
       });
 
-      // Como o modo 'no-cors' não permite acessar o corpo da resposta,
-      // você pode não conseguir processar a resposta da forma desejada
-      // No entanto, você pode verificar se a resposta foi bem-sucedida
+      const result = await response.json();
+
       if (response.ok) {
-        // Lembre-se de que você não poderá acessar o corpo da resposta
-        console.log('Login bem-sucedido, mas sem acesso aos dados da resposta');
-        // Redirecione para a página de mídia ou trate a resposta de outra forma
+        // Armazene o token no localStorage ou em um estado global
+        const { session } = result.data;
+        localStorage.setItem('access_token', session.access_token);
+
+        // Redirecione para a página de mídia
         navigate('/media');
       } else {
-        setError('Login falhou');
+        setError(result.message || 'Login failed');
       }
     } catch (error) {
-      console.error('Erro no login:', error);
-      setError('Ocorreu um erro. Tente novamente.');
+      console.error('Login error:', error);
+      setError('An error occurred. Please try again.');
     }
   };
 
