@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { supabase } from './supabaseClient';
+import { API_URL } from '../config';
 
 const FileUpload = () => {
   const [file, setFile] = useState(null);
@@ -15,28 +15,39 @@ const FileUpload = () => {
     setUploading(true);
     setError('');
     setSuccess('');
-
+  
     if (!file) {
       setError('Please select a file to upload.');
       setUploading(false);
       return;
     }
-
-    const { data, error } = await supabase.storage
-      .from('media') // Nome do bucket criado
-      .upload(`uploads/${file.name}`, file, {
-        cacheControl: '3600',
-        upsert: false,
+  
+    const formData = new FormData();
+    formData.append('file', file);
+  
+    const token = localStorage.getItem('access_token');
+  
+    try {
+      const response = await fetch(`${API_URL}/upload/file`, {
+        method: 'POST',
+        body: formData,
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
       });
-
-    if (error) {
-      setError('Upload failed: ' + error.message);
-    } else {
+  
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.message || 'Upload failed');
+      }
+  
       setSuccess('File uploaded successfully!');
+    } catch (err) {
+      setError(err.message);
+    } finally {
+      setUploading(false);
     }
-
-    setUploading(false);
-  };
+  };  
 
   return (
     <div>

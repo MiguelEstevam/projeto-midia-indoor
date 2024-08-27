@@ -106,7 +106,7 @@ button {
 }
 
 /* Estilo para os cards */
-.card, .file-list-container {
+.card {
   padding: 2rem;
   background-color: #fff;
   border-radius: 10px;
@@ -219,6 +219,13 @@ p {
 }
 
 /* Estilo para a lista de arquivos */
+
+.file-list-container{
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
 .file-list {
   list-style-type: none;
   padding: 0;
@@ -229,7 +236,8 @@ p {
 }
 
 .file-link {
-  display: inline-block;
+  display: flex;
+  align-items: center;
   background-color: #0a0b0b;
   color: white;
   padding: 0.5rem 1rem;
@@ -237,6 +245,23 @@ p {
   text-decoration: none;
   transition: background-color 0.3s ease-in-out;
   font-weight: bold;
+  width: 300px;
+  justify-content: space-between;
+}
+
+.file-link img,
+.file-link video {
+  width: 100px;
+  height: auto;
+  min-width: 100px;
+  height: auto;
+  max-height: 70px;
+  border-radius: 5px;
+}
+
+.file-link span {
+  flex-grow: 1;
+  margin-left: 10px;
 }
 
 .file-link:hover {
@@ -246,4 +271,24 @@ p {
 .file-link:focus {
   outline: none;
   box-shadow: 0 0 0 2px #c9e0f3;
+}
+
+.file-name {
+  display: inline-block;
+  max-width: 150px; /* Ajuste conforme necessário */
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Estilo para CKEditor */
+
+.ckeditor-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.ckeditor-container .ck-editor__editable_inline {
+  min-height: 250px; 
 }
