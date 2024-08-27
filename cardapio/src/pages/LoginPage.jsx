@@ -1,9 +1,9 @@
 import React, { useState } from 'react';
-import { supabase } from './supabaseClient';
 import { useNavigate } from 'react-router-dom';
-import './App.css';
+import { API_URL } from '../config';
+import '../App.css';
 
-const Login = () => {
+const LoginPage = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
@@ -11,16 +11,31 @@ const Login = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    
-    const { error } = await supabase.auth.signInWithPassword({
-      email,
-      password,
-    });
-  
-    if (error) {
-      setError(error.message);
-    } else {
-      navigate('/media'); // Redireciona para a página de media após login
+
+    try {
+      const response = await fetch(API_URL + '/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ email, password }),
+      });
+
+      const result = await response.json();
+
+      if (response.ok) {
+        // Armazene o token no localStorage ou em um estado global
+        const { session } = result.data;
+        localStorage.setItem('access_token', session.access_token);
+
+        // Redirecione para a página de mídia
+        navigate('/media');
+      } else {
+        setError(result.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      setError('An error occurred. Please try again.');
     }
   };
 
@@ -53,4 +68,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default LoginPage;
