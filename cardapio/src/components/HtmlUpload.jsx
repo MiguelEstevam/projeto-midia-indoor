@@ -5,6 +5,7 @@ import { API_URL } from '../config';
 
 const HtmlUpload = () => {
   const [editorData, setEditorData] = useState('');
+  const [title, setTitle] = useState('');
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
@@ -18,8 +19,8 @@ const HtmlUpload = () => {
     setError('');
     setSuccess('');
 
-    if (!editorData) {
-      setError('Insira algum conteúdo HTML antes do upload.');
+    if (!title || !editorData) {
+      setError('Insira um título e algum conteúdo HTML antes do upload.');
       setUploading(false);
       return;
     }
@@ -31,7 +32,7 @@ const HtmlUpload = () => {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
         },
-        body: JSON.stringify({ content: editorData }),
+        body: JSON.stringify({ title, htmlContent: editorData }),
       });
 
       if (!response.ok) {
@@ -40,6 +41,8 @@ const HtmlUpload = () => {
       }
 
       setSuccess('HTML uploaded successfully!');
+      setTitle(''); // Limpar o título após o upload
+      setEditorData(''); // Limpar o conteúdo do editor após o upload
     } catch (err) {
       setError(err.message);
     } finally {
@@ -50,6 +53,15 @@ const HtmlUpload = () => {
   return (
     <div className='ckeditor-container'>
       <h2>Upload de conteúdo HTML</h2>
+      <div>
+        <label>Título:</label>
+        <input
+          type="text"
+          value={title}
+          onChange={(e) => setTitle(e.target.value)}
+          required
+        />
+      </div>
       <CKEditor
         editor={ClassicEditor}
         data={editorData}
