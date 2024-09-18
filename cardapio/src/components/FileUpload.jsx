@@ -8,7 +8,18 @@ const FileUpload = () => {
   const [success, setSuccess] = useState('');
 
   const handleFileChange = (event) => {
-    setFile(event.target.files[0]);
+    const selectedFile = event.target.files[0];
+    
+    // Verifica se o arquivo é do tipo permitido
+    const allowedTypes = ['image/png', 'image/jpeg', 'video/mp4'];
+    if (selectedFile && !allowedTypes.includes(selectedFile.type)) {
+      setError('Invalid file type. Only PNG, JPG, and MP4 are allowed.');
+      setFile(null);
+      return;
+    }
+    
+    setFile(selectedFile);
+    setError('');
   };
 
   const uploadFile = async () => {
@@ -53,11 +64,11 @@ const FileUpload = () => {
     <div>
       <h2>Upload Media</h2>
       <input type="file" onChange={handleFileChange} />
+      {error && <p className="error-message" style={{ color: 'red' }}>{error}</p>}
+      {success && <p className="error-message" style={{ color: 'green' }}>{success}</p>}
       <button onClick={uploadFile} disabled={uploading}>
         {uploading ? 'Uploading...' : 'Upload'}
       </button>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
     </div>
   );
 };

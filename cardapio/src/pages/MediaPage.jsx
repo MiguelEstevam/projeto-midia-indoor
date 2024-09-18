@@ -1,14 +1,16 @@
 import React, { useEffect, useState } from 'react';
-import { useNavigate } from 'react-router-dom'; 
+import { useNavigate } from 'react-router-dom';
 import FileUpload from '../components/FileUpload';
 import HtmlUpload from '../components/HtmlUpload';
 import FileList from '../components/FileList';
+import HtmlList from '../components/HtmlList';
 import { API_URL } from '../config';
 
 const MediaPage = () => {
   const [session, setSession] = useState(null);
   const [loading, setLoading] = useState(true);
-  const navigate = useNavigate(); 
+  const [isContentListVisible, setIsContentListVisible] = useState(false); // Adiciona estado para alternar entre as divs
+  const navigate = useNavigate();
 
   useEffect(() => {
     const checkSession = async () => {
@@ -53,19 +55,32 @@ const MediaPage = () => {
     navigate('/login');
   };
 
+  const handleToggleContent = () => {
+    setIsContentListVisible(!isContentListVisible); // Alterna o estado
+  };
+
   if (loading) {
     return <div>Loading...</div>;
   }
 
   return (
     <div>
-      <h2>Bem Vindo ao Gerenciador de Mídia!</h2>
-      <div className="main-container">
-        <HtmlUpload />
-        <FileList />
+      <div className="upload-container" style={{ display: isContentListVisible ? 'none' : 'block' }}>
+        <h2>Bem Vindo ao Gerenciador de Mídia!</h2>
+        <div className="main-container">
+          <HtmlUpload />
+        </div>
+        <FileUpload />
+
       </div>
-      <FileUpload />
-      <button onClick={handleLogout}>Logout</button>
+      <div className="content-list-container" style={{ display: isContentListVisible ? 'block' : 'none' }}>
+        <FileList /> 
+        <HtmlList />
+      </div>
+      <div>
+        <button onClick={handleToggleContent}>{ isContentListVisible ? "Voltar para Upload" : "Gerenciar Conteúdos"}</button> 
+        <button className="logout-button" onClick={handleLogout}>Logout</button>
+      </div>
     </div>
   );
 };

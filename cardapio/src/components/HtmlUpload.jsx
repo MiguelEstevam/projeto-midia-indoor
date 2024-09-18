@@ -54,7 +54,7 @@ const HtmlUpload = () => {
 
   return (
     <div className='ckeditor-container'>
-      <h2>Upload de conteúdo HTML</h2>
+      <h2>Upload HTML</h2>
       <div>
         <label>Título:</label>
         <input

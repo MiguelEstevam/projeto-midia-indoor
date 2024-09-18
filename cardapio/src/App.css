@@ -34,15 +34,6 @@ body {
   box-sizing: border-box;
 }
 
-.card, .file-list-container {
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  flex: 1; /* Permite que os cards se expandam igualmente */
-  max-width: 48%; /* Limita a largura para cada card */
-  box-sizing: border-box;
-}
 
 button {
   background-color: #357ABD; /* Azul amigável */
@@ -59,65 +50,24 @@ button {
   box-sizing: border-box;
 }
 
-/* Garantindo que os elementos não saiam da tela */
 h2 {
-  margin-top: 0; /* Remove margens superiores para evitar que saia da tela */
+  margin-top: 0; 
 }
 
-.main-container {
-  margin-bottom: 1rem; /* Adiciona espaçamento na parte inferior para evitar que elementos toquem as bordas */
+
+/* botão de logout */
+.logout-button {
+  background-color: #E41E3F;
 }
 
-/* Ajustes para garantir que o botão de logout e outros elementos não saiam da tela */
-button {
-  margin-bottom: 1rem; /* Adiciona um pouco de margem inferior */
+.logout-button:hover{
+  background-color: #CA3115;
 }
 
-.logo {
-  height: 80px;
-  margin-bottom: 2rem;
-  transition: transform 0.3s ease-in-out;
-}
-
-.logo:hover {
-  transform: scale(1.1);
-}
-
-@keyframes logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .logo.react {
-    animation: logo-spin infinite 20s linear;
-  }
-}
-
-/* Layout horizontal para os componentes principais */
-.main-container {
-  display: flex;
-  justify-content: space-between; /* Espaçamento entre os componentes */
-  gap: 20px; /* Espaço entre os componentes */
-}
-
-/* Estilo para os cards */
-.card {
-  padding: 2rem;
-  background-color: #fff;
-  border-radius: 10px;
-  box-shadow: 0px 5px 15px rgba(0, 0, 0, 0.1);
-  flex: 1; /* Permite que os cards se expandam igualmente */
-  max-width: 48%; /* Limita a largura para cada card */
-}
 
 /* Estilo dos botões */
 button {
-  background-color: #357ABD; /* Azul amigável */
+  background-color: #357ABD; 
   color: #fff;
   border: none;
   padding: 1rem 2rem;
@@ -128,6 +78,7 @@ button {
   width: 100%;
   font-weight: bold;
   margin-top: 1rem;
+  margin-bottom: 5px;
 }
 
 button:hover {
@@ -211,74 +162,11 @@ a:hover {
 }
 
 /* Estilo para mensagem de erro */
-p {
+.error-message {
   color: red;
   font-weight: bold;
-  margin-top: -1rem;
-  margin-bottom: 1rem;
-}
-
-/* Estilo para a lista de arquivos */
-
-.file-list-container{
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-}
-
-.file-list {
-  list-style-type: none;
-  padding: 0;
-}
-
-.file-list li {
-  margin-bottom: 1rem;
-}
-
-.file-link {
-  display: flex;
-  align-items: center;
-  background-color: #0a0b0b;
-  color: white;
-  padding: 0.5rem 1rem;
-  border-radius: 5px;
-  text-decoration: none;
-  transition: background-color 0.3s ease-in-out;
-  font-weight: bold;
-  width: 300px;
-  justify-content: space-between;
-}
-
-.file-link img,
-.file-link video {
-  width: 100px;
-  height: auto;
-  min-width: 100px;
-  height: auto;
-  max-height: 70px;
-  border-radius: 5px;
-}
-
-.file-link span {
-  flex-grow: 1;
-  margin-left: 10px;
-}
-
-.file-link:hover {
-  background-color: #2e6da4;
-}
-
-.file-link:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #c9e0f3;
-}
-
-.file-name {
-  display: inline-block;
-  max-width: 150px; /* Ajuste conforme necessário */
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
+  margin-top: 0;
+  margin-bottom: 0;
 }
 
 /* Estilo para CKEditor */

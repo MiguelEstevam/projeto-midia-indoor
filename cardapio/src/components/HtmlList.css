@@ -1,0 +1,99 @@
+/* HtmlList.css */
+
+.html-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1; 
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+  }
+  
+  .html-list-header {
+    margin-bottom: 10px;
+  }
+  
+  .component-title{
+    text-align: center;
+  }
+  
+  .html-list {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    max-height: 380px; 
+    overflow-y: auto;
+  }
+  
+  .html-item {
+    margin-bottom: 15px;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    position: relative; 
+  }
+  
+  .html-content {
+    margin-top: 10px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    overflow: hidden;
+  }
+  
+  .expand-icon {
+    cursor: pointer;
+    width: 20px; 
+    height: 20px; 
+    margin-right: 10px; 
+    position: relative;
+    transition: transform 0.3s ease;
+  }
+  
+  .expand-icon.rotated {
+    transform: rotate(90deg); 
+  }  
+
+  .html-delete-button {
+    background-color: #E41E3F;
+    color: white;
+    border: none;
+    width: 10%;
+    height: 40px;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    position: absolute;
+    top: 10px;
+    right: 10px;
+  }
+  
+  .delete-button:hover {
+    background-color: #CA3115;
+  }
+  
+  .delete-button:focus {
+    outline: none;
+  }
+  
+  .load-more-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #357ABD;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+  }
+  
+  .load-more-button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+  }
+  

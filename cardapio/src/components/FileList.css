@@ -1,0 +1,117 @@
+.file-list-container {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    flex: 1; 
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden;
+}
+
+.file-list-header {
+    flex-shrink: 0;
+    margin-bottom: 10px;
+}
+
+.component-title{
+    text-align: center;
+}
+
+.file-list {
+    height: 420px;
+    max-height: 500px;
+    list-style-type: none;
+    padding: 0;
+    flex-grow: 1;
+    overflow-y: auto; 
+    overflow-x: hidden;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-list li {
+    margin-bottom: 10px;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background-color: #f9f9f9;
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+}
+
+.file-item a {
+    color: black;
+    text-decoration: none;
+}
+
+.file-item a:hover {
+    text-decoration: underline;
+}
+
+.file-link {
+    display: flex;
+    align-items: center;
+    background-color: #f9f9f9;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    text-decoration: none;
+    transition: background-color 0.3s ease-in-out;
+    font-weight: bold;
+    justify-content: space-between;
+    width: 100%; 
+}
+
+.file-link img,
+.file-link video {
+    width: 100px;
+    height: auto;
+    max-height: 70px;
+    border-radius: 5px;
+}
+
+.file-link span {
+    flex-grow: 1;
+    margin-left: 10px;
+}
+
+.load-more-button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    background-color: #357ABD;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+    text-align: center;
+    margin-top: 10px;
+}
+
+.load-more-button:disabled {
+    background-color: #c0c0c0;
+    cursor: not-allowed;
+}
+
+.file-delete-button {
+    background-color: #E41E3F;
+    width: 10%;
+    height: 40px;
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    margin-right: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.delete-button:hover {
+    background-color: #CA3115;
+}
+
+.delete-button:focus {
+    outline: none;
+}

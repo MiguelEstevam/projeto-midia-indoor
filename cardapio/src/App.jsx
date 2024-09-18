@@ -17,7 +17,7 @@ const App = () => {
               <MediaPage />
             </ProtectedRoute>
           }
-        />
+        />zz
       </Routes>
     </Router>
   );
