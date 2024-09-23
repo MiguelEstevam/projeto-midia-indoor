@@ -95,8 +95,8 @@ const HtmlList = () => {
                 <div className="html-title">
                   <h3>{content.title}</h3>
                   <img
-                    src="../src/assets/iconExpandir.png"
-                    alt={content.expanded ? 'Minimizar' : 'Expandir'}
+                    src="../src/assets/arrow.svg"
+                    alt={content.expanded ? '-' : '+'}
                     className={`expand-icon ${content.expanded ? 'rotated' : ''}`}
                     onClick={() => handleExpand(content.id)}
                   />
