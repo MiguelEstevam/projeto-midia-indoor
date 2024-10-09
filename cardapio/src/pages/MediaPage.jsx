@@ -47,16 +47,16 @@ const MediaPage = () => {
   }, [navigate]);
 
   const handleLogout = () => {
-
-    //já que o token tem um prazo de validade apenas remove ele do localstorage
-    //assim para receber outro é preciso fazer login novamente
-
     localStorage.removeItem('access_token');
     navigate('/login');
   };
 
   const handleToggleContent = () => {
     setIsContentListVisible(!isContentListVisible); // Alterna o estado
+  };
+
+  const handleNavigateToPlaylists = () => {
+    navigate('/playlists'); // Redireciona para a tela de playlists
   };
 
   if (loading) {
@@ -71,14 +71,16 @@ const MediaPage = () => {
           <HtmlUpload />
         </div>
         <FileUpload />
-
       </div>
+
       <div className="content-list-container" style={{ display: isContentListVisible ? 'block' : 'none' }}>
-        <FileList /> 
+        <FileList />
         <HtmlList />
       </div>
+
       <div>
-        <button onClick={handleToggleContent}>{ isContentListVisible ? "Voltar para Upload" : "Gerenciar Conteúdos"}</button> 
+        <button onClick={handleToggleContent}>{isContentListVisible ? "Voltar para Upload" : "Gerenciar Conteúdos"}</button>
+        <button onClick={handleNavigateToPlaylists}>Ir para Playlists</button> {/* Botão para navegar para a tela de playlists */}
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
     </div>

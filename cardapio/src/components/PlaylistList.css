@@ -1,0 +1,43 @@
+.playlist-container {
+    display: flex;
+    width: 100%;
+    
+}
+
+.info-playlist-container {
+    flex: 3;
+    
+}
+
+.button-container {
+    flex: 2;
+    display: flex;
+    gap: 15px;
+    
+}
+
+h2 {
+    margin-top: 50px;
+}
+
+a {
+    flex: 1;
+}
+
+.edit-playlist-button {
+    font-size: 14px;
+    height: 40%;
+
+}
+
+.delete-playlist-button {
+    background-color: red;
+    flex: 1;
+    height: 40%;
+    padding: 5px 10px;
+    font-size: 14px;   
+}
+
+.delete-playlist-button:hover{
+    background-color: #CA3115;
+}

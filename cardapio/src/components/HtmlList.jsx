@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useCallback } from 'react';
 import { API_URL } from '../config';
-import './HtmlList.css'; // Certifique-se de que os estilos estão atualizados
+import './HtmlList.css';
 
 const HtmlList = () => {
   const [contents, setContents] = useState([]);
@@ -8,6 +8,11 @@ const HtmlList = () => {
   const [error, setError] = useState(null);
   const [offset, setOffset] = useState(0);
   const [hasMoreContents, setHasMoreContents] = useState(true);
+  const [playlists, setPlaylists] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedContentId, setSelectedContentId] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [duration, setDuration] = useState(20);
 
   const getToken = () => localStorage.getItem('access_token');
 
@@ -78,6 +83,58 @@ const HtmlList = () => {
     ));
   };
 
+  const fetchPlaylists = async () => {
+    try {
+      const response = await fetch(`${API_URL}/playlists/db`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch playlists');
+      }
+
+      const result = await response.json();
+      setPlaylists(result.data || []);
+    } catch (error) {
+      console.error('Error fetching playlists:', error);
+    }
+  };
+
+  const handleAddToPlaylist = async () => {
+    try {
+      const response = await fetch(`${API_URL}/playlist/add/html/${selectedContentId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({
+          playlistId: selectedPlaylist,
+          duration: duration
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to associate content with playlist');
+      }
+
+      setShowModal(false);
+      setSelectedContentId(null);
+      setSelectedPlaylist(null);
+      setDuration(20);
+    } catch (error) {
+      console.error('Error associating content:', error);
+    }
+  };
+
+  const handleOpenModal = (contentId) => {
+    setSelectedContentId(contentId);
+    fetchPlaylists();
+    setShowModal(true);
+  };
+
   return (
     <div className="html-list-container">
       <header className="html-list-header">
@@ -93,19 +150,29 @@ const HtmlList = () => {
             {contents.map((content) => (
               <li key={content.id} className="html-item">
                 <div className="html-title">
-                  <h3>{content.title}</h3>
-                  <img
-                    src="../src/assets/arrow.svg"
-                    alt={content.expanded ? '-' : '+'}
-                    className={`expand-icon ${content.expanded ? 'rotated' : ''}`}
-                    onClick={() => handleExpand(content.id)}
-                  />
-                  <button
-                    className="html-delete-button"
-                    onClick={() => handleDelete(content.id)}
-                  >
-                    Delete
-                  </button>
+                  <div className="html-info-container">
+                    <h3>{content.title}</h3>
+                    <img
+                      src="../src/assets/arrow.svg"
+                      alt={content.expanded ? '-' : '+'}
+                      className={`expand-icon ${content.expanded ? 'rotated' : ''}`}
+                      onClick={() => handleExpand(content.id)}
+                    />
+                  </div>
+                  <div className="li-buttons">
+                    <button
+                      className="html-delete-button"
+                      onClick={() => handleDelete(content.id)}
+                    >
+                      Deletar
+                    </button>
+                    <button
+                      className="html-add-button"
+                      onClick={() => handleOpenModal(content.id)}
+                    >
+                      Add
+                    </button>
+                  </div>
                 </div>
                 {content.expanded && (
                   <div className="html-content" dangerouslySetInnerHTML={{ __html: content.content }} />
@@ -117,10 +184,35 @@ const HtmlList = () => {
               onClick={handleLoadMore}
               disabled={!hasMoreContents || loading}
             >
-              {loading ? 'Loading...' : 'Load More'}
+              {loading ? 'Carregando...' : 'Carregar Mais'}
             </button>
           </ul>
         </>
+      )}
+
+      {showModal && (
+        <div className="modal">
+          <h3>Escolha a playlist</h3>
+          <select onChange={(e) => setSelectedPlaylist(e.target.value)} value={selectedPlaylist || ""}>
+            <option value="">Selecione uma playlist</option>
+            {playlists.map((playlist) => (
+              <option key={playlist.id} value={playlist.id}>
+                {playlist.name}
+              </option>
+            ))}
+          </select>
+          <div>
+            <label>Duração:</label>
+            <input
+              type="number"
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+              min="1" // Duração mínima
+            />
+          </div>
+          <button onClick={handleAddToPlaylist}>Confirmar</button>
+          <button onClick={() => setShowModal(false)}>Cancelar</button>
+        </div>
       )}
     </div>
   );
