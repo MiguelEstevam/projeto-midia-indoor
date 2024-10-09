@@ -74,7 +74,7 @@ const MediaPage = () => {
       </div>
 
       <div className="content-list-container" style={{ display: isContentListVisible ? 'block' : 'none' }}>
-        <FileList /> 
+        <FileList />
         <HtmlList />
       </div>
 

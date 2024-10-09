@@ -3,12 +3,17 @@ import { API_URL } from '../config'; // URL da sua API
 import './FileList.css'; // Estilos
 
 const FileList = () => {
-  const [files, setFiles] = useState([]);  // Lista de arquivos
-  const [baseUrl, setBaseUrl] = useState('');  // Base URL para acessar arquivos
-  const [loading, setLoading] = useState(true);  // Estado de carregamento
-  const [error, setError] = useState(null);  // Estado de erro
-  const [offset, setOffset] = useState(0);  // Controle de paginação (offset)
-  const [hasMoreFiles, setHasMoreFiles] = useState(true);  // Verifica se há mais arquivos para carregar
+  const [files, setFiles] = useState([]);
+  const [baseUrl, setBaseUrl] = useState('');
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const [offset, setOffset] = useState(0);
+  const [hasMoreFiles, setHasMoreFiles] = useState(true);
+  const [playlists, setPlaylists] = useState([]);
+  const [showModal, setShowModal] = useState(false);
+  const [selectedFileId, setSelectedFileId] = useState(null);
+  const [selectedPlaylist, setSelectedPlaylist] = useState(null);
+  const [duration, setDuration] = useState(20); // Duração padrão
 
   // Função para pegar o token de autenticação
   const getToken = () => localStorage.getItem('access_token');
@@ -22,25 +27,23 @@ const FileList = () => {
           'Authorization': `Bearer ${getToken()}`,
         },
       });
-  
+
       if (!response.ok) {
         throw new Error('Network response was not ok');
       }
-  
+
       const result = await response.json();
-  
-      // Verificar se o result e result.data estão definidos
+
       if (!result || !result.data) {
         throw new Error('Invalid API response');
       }
-  
+
       setBaseUrl(result.base_url);
       setFiles((prevFiles) => {
-        // Filtrar arquivos novos apenas se result.data existir
         const newFiles = result.data?.filter(file => !prevFiles.some(prevFile => prevFile.id === file.id)) || [];
         return [...prevFiles, ...newFiles];
       });
-  
+
       setOffset(newOffset + 10);
       setHasMoreFiles(result.data.length === 10);
     } catch (error) {
@@ -50,21 +53,17 @@ const FileList = () => {
       setLoading(false);
     }
   }, []);
-  
 
-  // Faz a chamada para buscar arquivos na montagem do componente
   useEffect(() => {
     fetchFiles(0);
   }, [fetchFiles]);
 
-  // Função chamada ao clicar em "Load More"
   const handleLoadMore = () => {
     if (hasMoreFiles) {
       fetchFiles(offset);
     }
   };
 
-  // Função para deletar arquivo
   const handleDelete = async (fileId) => {
     if (window.confirm('Você quer realmente deletar esse arquivo?')) {
       try {
@@ -79,7 +78,6 @@ const FileList = () => {
           throw new Error('Falha ao deletar arquivo');
         }
 
-        // Remove o arquivo deletado da lista
         setFiles((prevFiles) => prevFiles.filter(file => file.id !== fileId));
       } catch (error) {
         console.error('Erro ao deletar arquivo:', error.message);
@@ -88,7 +86,7 @@ const FileList = () => {
     }
   };
 
-  // Função para renderizar a visualização do arquivo, baseado na extensão
+  // Função para renderizar a visualização do arquivo
   const renderFilePreview = (file) => {
     const fileExtension = file.file_extension;
     const fileUrl = file.file_url ? `${baseUrl}/${file.file_url}` : '#';
@@ -97,23 +95,70 @@ const FileList = () => {
       return <span>Carregando...</span>;
     }
 
-    // Renderiza imagens
     if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
       return <img src={fileUrl} alt={file.file_name} />;
-    } 
-    // Renderiza vídeos
-    else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
+    } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
       return (
         <video width="100" controls>
           <source src={fileUrl} type={`video/${fileExtension}`} />
           Seu navegador não suporta a tag de vídeo.
         </video>
       );
-    } 
-    // Se for outro tipo de arquivo, apenas exibe o nome
-    else {
+    } else {
       return <span>{file.file_name}</span>;
     }
+  };
+
+  const fetchPlaylists = async () => {
+    try {
+      const response = await fetch(`${API_URL}/playlists/db`, {
+        headers: {
+          'Authorization': `Bearer ${getToken()}`,
+        },
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to fetch playlists');
+      }
+
+      const result = await response.json();
+      setPlaylists(result.data || []);
+    } catch (error) {
+      console.error('Error fetching playlists:', error);
+    }
+  };
+
+  const handleAddToPlaylist = async () => {
+    try {
+      const response = await fetch(`${API_URL}/playlist/add/file/${selectedFileId}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'Authorization': `Bearer ${getToken()}`,
+        },
+        body: JSON.stringify({
+          playlistId: selectedPlaylist,
+          duration: duration
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to associate file with playlist');
+      }
+
+      setShowModal(false);
+      setSelectedFileId(null);
+      setSelectedPlaylist(null);
+      setDuration(20);
+    } catch (error) {
+      console.error('Error associating file:', error);
+    }
+  };
+
+  const handleOpenModal = (fileId) => {
+    setSelectedFileId(fileId);
+    fetchPlaylists();
+    setShowModal(true);
   };
 
   return (
@@ -122,7 +167,6 @@ const FileList = () => {
         <h2 className="component-title">Arquivos Enviados</h2>
       </header>
 
-      {/* Renderiza enquanto está carregando ou exibe erro */}
       {loading && !files.length ? (
         <p>Carregando arquivos...</p>
       ) : error ? (
@@ -139,30 +183,61 @@ const FileList = () => {
                     rel="noopener noreferrer"
                     className="file-link"
                   >
-                    {renderFilePreview(file)}  {/* Visualiza o preview do arquivo */}
-                    <span className="file-name">{file.file_name}</span>
+                    {renderFilePreview(file)}
+                    {file.file_name}
                   </a>
                 </div>
-                {/* Botão de deletar arquivo */}
-                <button
-                  className="file-delete-button"
-                  onClick={() => handleDelete(file.id)}
-                >
-                  Deletar
-                </button>
+                <div className="li-buttons">
+                  <button
+                    className="file-delete-button"
+                    onClick={() => handleDelete(file.id)}
+                  >
+                    Deletar
+                  </button>
+                  <button
+                    className="file-add-button"
+                    onClick={() => handleOpenModal(file.id)}
+                  >
+                    Add
+                  </button>
+                </div>
               </li>
             ))}
+            <button
+              className="load-more-button"
+              onClick={handleLoadMore}
+              disabled={!hasMoreFiles || loading}
+            >
+              {loading ? 'Carregando...' : 'Carregar Mais'}
+            </button>
           </ul>
 
-          {/* Botão para carregar mais arquivos */}
-          <button
-            className="load-more-button"
-            onClick={handleLoadMore}
-            disabled={!hasMoreFiles || loading}
-          >
-            {loading ? 'Carregando...' : 'Carregar Mais'}
-          </button>
         </>
+      )}
+
+      {showModal && (
+        <div className="modal">
+          <h3>Escolha a playlist</h3>
+          <select onChange={(e) => setSelectedPlaylist(e.target.value)} value={selectedPlaylist || ""}>
+            <option value="">Selecione uma playlist</option>
+            {playlists.map((playlist) => (
+              <option key={playlist.id} value={playlist.id}>
+                {playlist.name}
+              </option>
+            ))}
+          </select>
+          <div>
+            <label>Duração:</label>
+            <input
+              type="number"
+              value={duration}
+              onChange={(e) => setDuration(Number(e.target.value))}
+              min="1" // Duração mínima
+            />
+          </div>
+          <button onClick={handleAddToPlaylist}>Confirmar</button>
+          <button onClick={() => setShowModal(false)}>Cancelar</button>
+        </div>
       )}
     </div>
   );

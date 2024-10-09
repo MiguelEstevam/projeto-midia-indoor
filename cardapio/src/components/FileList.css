@@ -95,9 +95,13 @@
     cursor: not-allowed;
 }
 
+.li-buttons{
+    display: flex;
+}
+
 .file-delete-button {
     background-color: #E41E3F;
-    width: 10%;
+    flex: 1;
     height: 40px;
     color: white;
     border: none;
@@ -108,10 +112,32 @@
     transition: background-color 0.3s ease;
 }
 
-.delete-button:hover {
+.file-delete-button:hover {
     background-color: #CA3115;
 }
 
 .delete-button:focus {
     outline: none;
 }
+
+.file-add-button {
+    background-color: #158D5C;
+    flex: 1;
+}
+
+.file-add-button:hover {
+    background-color: #588601;
+}
+
+.modal {
+    display: block; /* Verifique se o modal está visível */
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    z-index: 1000;
+  }
+  

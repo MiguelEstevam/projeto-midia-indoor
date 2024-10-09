@@ -18,6 +18,14 @@
     text-align: center;
   }
   
+  .html-title {
+    display: flex;
+  }
+
+  .html-info-container{
+    flex: 1;
+  }
+
   .html-list {
     list-style-type: none;
     padding: 0;
@@ -56,30 +64,44 @@
     transform: rotate(90deg); 
   }  
 
+  .li-buttons{ 
+    display: flex;
+  }
+
   .html-delete-button {
     background-color: #E41E3F;
     color: white;
     border: none;
-    width: 10%;
+    flex: 1;
     height: 40px;
     padding: 5px 10px;
     margin-right: 10px;
     border-radius: 5px;
     cursor: pointer;
     transition: background-color 0.3s ease;
-    position: absolute;
+ 
     top: 10px;
     right: 10px;
   }
   
-  .delete-button:hover {
+  .html-delete-button:hover {
     background-color: #CA3115;
   }
   
-  .delete-button:focus {
+  .html-delete-button:focus {
     outline: none;
   }
   
+  .html-add-button{
+    background-color: #158D5C;
+    height: 40px;
+    flex: 1;
+  }
+
+  .html-add-button:hover{
+    background-color: #588601;
+  }
+
   .load-more-button {
     width: 100%;
     padding: 10px;

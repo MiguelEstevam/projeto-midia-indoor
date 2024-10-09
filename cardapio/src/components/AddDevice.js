@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { API_URL } from '../config';
 
-const CreatePlaylist = ({ onCreate }) => {
+const AddDevice = ({ onAdd }) => {
   const [name, setName] = useState('');
   const [description, setDescription] = useState('');
   const [error, setError] = useState('');
@@ -15,36 +15,32 @@ const CreatePlaylist = ({ onCreate }) => {
       return;
     }
 
-    if (name.length < 3 || description.length < 10) {
-      setError('O nome deve ter pelo menos 3 caracteres e a descrição pelo menos 10 caracteres.');
-      return;
-    }
-
     setLoading(true);
+
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch(`${API_URL}/upload/playlist`, { 
-        method: 'POST', 
+      const response = await fetch(`${API_URL}/upload/device`, {
+        method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'Authorization': `Bearer ${token}`,
         },
-        body: JSON.stringify({ name, description }), 
-      });      
+        body: JSON.stringify({ name, description }),
+      });
 
       if (!response.ok) {
         const errorData = await response.json();
-        throw new Error(errorData.error || 'Erro ao criar playlist');
+        throw new Error(errorData.error || 'Erro ao adicionar dispositivo');
       }
 
-      const newPlaylist = await response.json();
-      onCreate(newPlaylist); // chamando o componente pai com a nova playlist criada
+      const newDevice = await response.json();
+      onAdd(newDevice); // Atualiza a lista de dispositivos no componente pai
       setName('');
       setDescription('');
       setError('');
     } catch (error) {
-      console.error('Erro ao criar a playlist:', error);
+      console.error('Erro ao adicionar dispositivo:', error);
       setError(error.message);
     } finally {
       setLoading(false);
@@ -53,28 +49,27 @@ const CreatePlaylist = ({ onCreate }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Criar Nova Playlist</h2>
+      <h2>Adicionar Dispositivo</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <input
         type="text"
         value={name}
         onChange={(e) => setName(e.target.value)}
-        placeholder="Nome da Playlist"
+        placeholder="Nome do Dispositivo"
         required
-        minLength="3"
       />
-      <textarea
+      <input
+        type="text"
         value={description}
         onChange={(e) => setDescription(e.target.value)}
-        placeholder="Descrição"
+        placeholder="Descrição do Dispositivo"
         required
-        minLength="10"
       />
       <button type="submit" disabled={loading}>
-        {loading ? 'Criando...' : 'Criar Playlist'}
+        {loading ? 'Adicionando...' : 'Adicionar Dispositivo'}
       </button>
     </form>
   );
 };
 
-export default CreatePlaylist;
+export default AddDevice;
