@@ -16,7 +16,6 @@ const AddDevice = ({ onAdd }) => {
     }
 
     setLoading(true);
-
     const token = localStorage.getItem('access_token');
 
     try {
@@ -35,7 +34,8 @@ const AddDevice = ({ onAdd }) => {
       }
 
       const newDevice = await response.json();
-      onAdd(newDevice); // Atualiza a lista de dispositivos no componente pai
+      console.log('Novo dispositivo adicionado:', newDevice); // Verifique aqui o que está sendo retornado
+      onAdd(newDevice); // Passa o dispositivo retornado corretamente
       setName('');
       setDescription('');
       setError('');

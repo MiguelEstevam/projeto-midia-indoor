@@ -5,7 +5,6 @@ import './PlaylistList.css'; // Importa um arquivo CSS para estilização (se ne
 const PlaylistList = ({ playlists, onDelete }) => {
   return (
     <div>
-      <h2>Playlists</h2>
       <ul>
         {playlists.map((playlist) => (
           <li key={playlist.id}>

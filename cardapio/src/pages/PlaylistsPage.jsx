@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PlaylistForm from '../components/PlaylistForm';
 import PlaylistList from '../components/PlaylistList';
-import { API_URL } from '../config'; // Ajuste o caminho de importação se necessário
+import { API_URL } from '../config'; 
 
 const PlaylistsPage = () => {
   const [playlists, setPlaylists] = useState([]);
@@ -24,7 +24,7 @@ const PlaylistsPage = () => {
         }
 
         const data = await response.json();
-        setPlaylists(data.data); // Acesse os dados da resposta corretamente
+        setPlaylists(data.data);
       } catch (err) {
         console.error(err);
         setError(err.message);
@@ -66,7 +66,8 @@ const PlaylistsPage = () => {
 
   return (
     <div>
-      <h1>Gerenciar Playlists</h1>
+      <div className="playlists-nav">
+      </div>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <PlaylistForm onAddPlaylist={handleAddPlaylist} />
       <PlaylistList playlists={playlists} onDelete={handleDelete} />

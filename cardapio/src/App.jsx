@@ -2,6 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import LoginPage from './pages/LoginPage';
 import MediaPage from './pages/MediaPage';
+import DevicesPage from './pages/DevicesPage';
 import PlaylistsPage from './pages/PlaylistsPage'; // Agora importando o PlaylistsPage
 import PlaylistForm from './components/PlaylistForm';
 import ProtectedRoute from './components/ProtectedRoute';
@@ -13,6 +14,7 @@ const App = () => {
         <Route path="/" element={<Navigate to="/login" />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/media" element={<ProtectedRoute><MediaPage /></ProtectedRoute>} />
+        <Route path="/devices" element={<ProtectedRoute><DevicesPage /></ProtectedRoute>}></Route>
         <Route path="/playlists" element={<ProtectedRoute><PlaylistsPage /></ProtectedRoute>} />
         <Route path="/playlists/edit/:id" element={<PlaylistForm />} />
       </Routes>

@@ -1,0 +1,43 @@
+.modal {
+    display: block; /* Mostra o modal quando necessário */
+    position: fixed; /* Mantém o modal fixo na tela */
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%); /* Centraliza o modal */
+    background-color: white; /* Cor de fundo do modal */
+    padding: 20px; /* Espaçamento interno */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra ao redor do modal */
+    z-index: 1000; /* Coloca o modal acima de outros elementos */
+    width: 300px; /* Largura do modal */
+    border-radius: 8px; /* Bordas arredondadas */
+}
+
+.modal select {
+    width: 100%; /* Largura total do select */
+    padding: 8px; /* Espaçamento interno do select */
+    margin-bottom: 15px; /* Margem inferior do select */
+    border: 1px solid #ccc; /* Borda do select */
+    border-radius: 4px; /* Bordas arredondadas do select */
+}
+
+.modal h3 {
+    margin: 0 0 10px; /* Margem inferior do título */
+}
+
+.modal label {
+    display: block; /* Faz os labels ocuparem toda a largura */
+    margin-bottom: 8px; /* Margem inferior entre os labels */
+}
+
+.modal input {
+    width: 100%; /* Largura total do input */
+    padding: 8px; /* Espaçamento interno do input */
+    margin-bottom: 15px; /* Margem inferior dos inputs */
+    border: 1px solid #ccc; /* Borda do input */
+    border-radius: 4px; /* Bordas arredondadas dos inputs */
+}
+
+.modal button {
+    margin-right: 10px; /* Espaçamento entre os botões */
+    padding: 8px 15px; /* Espaçamento interno dos botões */
+}
