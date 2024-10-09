@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { API_URL } from '../config';
+import { Link } from 'react-router-dom';
 import './PlaylistForm.css'; // Importando o arquivo de estilo
 
 const PlaylistForm = ({ onAddPlaylist }) => {
@@ -159,11 +160,11 @@ const PlaylistForm = ({ onAddPlaylist }) => {
   const renderContentPreview = (content) => {
     const fileUrl = content.media?.file_url ? `${baseUrl}/${content.media.file_url}` : '#';
     const fileExtension = content.media?.file_extension;
-  
+
     if (!fileUrl) {
       return <span>Carregando...</span>;
     }
-  
+
     if (['jpg', 'jpeg', 'png', 'gif'].includes(fileExtension)) {
       return <img src={fileUrl} alt={content.media.file_name} width="100" />;
     } else if (['mp4', 'webm', 'ogg'].includes(fileExtension)) {
@@ -177,9 +178,12 @@ const PlaylistForm = ({ onAddPlaylist }) => {
       return <span>{content.media.file_name}</span>;
     }
   };
-  
+
   return (
     <div>
+      <Link to={isEditing ? '/playlists' : '/media'}>
+        <button className="go-back-btn">Voltar</button>
+      </Link>
       <h2>{isEditing ? 'Editar Playlist' : 'Criar Nova Playlist'}</h2>
       {error && <p style={{ color: 'red' }}>{error}</p>}
 
@@ -201,7 +205,7 @@ const PlaylistForm = ({ onAddPlaylist }) => {
         <button type="submit">{isEditing ? 'Salvar' : 'Criar'}</button>
       </form>
 
-      <h3>Conteúdos da Playlist</h3>
+      <h3>{isEditing ? 'Conteúdos da Playlist' : 'Playlists'}</h3>
       <ul className="content-list">
         {contents.map(content => (
           <li key={content.ca_id} className="content-item">

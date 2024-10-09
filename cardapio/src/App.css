@@ -180,3 +180,7 @@ a:hover {
 .ckeditor-container .ck-editor__editable_inline {
   min-height: 250px; 
 }
+
+.go-back-btn{
+  width: 15%;
+}

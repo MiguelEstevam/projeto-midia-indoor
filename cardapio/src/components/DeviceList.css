@@ -1,0 +1,15 @@
+/* DeviceList.css */
+
+
+.li-device-container{
+    display: flex;
+}
+
+.device-info-container{
+    flex: 1;
+}
+
+.edit-delete-btn-container{
+    flex: 0.2;
+    align-content: end;
+}
