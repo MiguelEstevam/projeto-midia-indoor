@@ -56,11 +56,15 @@ const MediaPage = () => {
   };
 
   const handleNavigateToPlaylists = () => {
-    navigate('/playlists'); // Redireciona para a tela de playlists
+    navigate('/playlists');
   };
 
   const handleNavigateToDevices = () => {
     navigate('/devices');
+  }
+
+  const handleNavigateToCardapios = () => {
+    navigate('/cardapios');
   }
 
   if (loading) {
@@ -86,6 +90,7 @@ const MediaPage = () => {
         <button onClick={handleToggleContent}>{isContentListVisible ? "Voltar para Upload" : "Gerenciar Conteúdos"}</button>
         <button onClick={handleNavigateToPlaylists}>Gerenciar Playlists</button>
         <button onClick={handleNavigateToDevices}>Gerenciar Dispositivos</button>
+        <button onClick={handleNavigateToCardapios}>Gerenciar Cardápios</button>
         <button className="logout-button" onClick={handleLogout}>Logout</button>
       </div>
     </div>

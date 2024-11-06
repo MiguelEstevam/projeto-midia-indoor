@@ -6,6 +6,8 @@ import DevicesPage from './pages/DevicesPage';
 import PlaylistsPage from './pages/PlaylistsPage'; // Agora importando o PlaylistsPage
 import PlaylistForm from './components/PlaylistForm';
 import ProtectedRoute from './components/ProtectedRoute';
+import CardapiosPage from './pages/CardapiosPage';
+import EditCardapio from './components/EditCardapio';
 
 const App = () => {
   return (
@@ -16,7 +18,9 @@ const App = () => {
         <Route path="/media" element={<ProtectedRoute><MediaPage /></ProtectedRoute>} />
         <Route path="/devices" element={<ProtectedRoute><DevicesPage /></ProtectedRoute>}></Route>
         <Route path="/playlists" element={<ProtectedRoute><PlaylistsPage /></ProtectedRoute>} />
-        <Route path="/playlists/edit/:id" element={<PlaylistForm />} />
+        <Route path="/playlists/edit/:id" element={<ProtectedRoute><PlaylistForm /></ProtectedRoute>} />
+        <Route path="/cardapios" element={<ProtectedRoute><CardapiosPage/></ProtectedRoute>} />
+        <Route path="/cardapios/edit/:idCardapio" element={<ProtectedRoute><EditCardapio /></ProtectedRoute>} />
       </Routes>
     </Router>
   );
