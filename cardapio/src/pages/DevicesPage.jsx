@@ -85,7 +85,7 @@ const DevicesPage = () => {
 
         // Verifica se todos os dados necessários estão presentes
         if (!updatedDevice.id || !updatedDevice.name || !updatedDevice.description) {
-            console.assert('ID, Nome e Descrição são obrigatórios para atualizar o dispositivo.');
+            console.error('ID, Nome e Descrição são obrigatórios para atualizar o dispositivo.');
             return;
         }
 
