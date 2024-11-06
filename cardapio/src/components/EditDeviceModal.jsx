@@ -6,27 +6,38 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
     const [name, setName] = useState('');
     const [description, setDescription] = useState('');
     const [playlistId, setPlaylistId] = useState('');
+    const [menuId, setMenuId] = useState(''); 
     const [playlists, setPlaylists] = useState([]);
+    const [menus, setMenus] = useState([]); 
     const [error, setError] = useState('');
 
-    // Função para buscar playlists
     const fetchPlaylists = async () => {
         try {
             const token = localStorage.getItem('access_token');
             const response = await fetch(`${API_URL}/playlists/db`, {
                 method: 'GET',
-                headers: {
-                    'Authorization': `Bearer ${token}`,
-                },
+                headers: { 'Authorization': `Bearer ${token}` },
             });
-
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Erro ao buscar playlists');
-            }
-
+            if (!response.ok) throw new Error('Erro ao buscar playlists');
             const data = await response.json();
             setPlaylists(data.data);
+        } catch (err) {
+            console.error(err);
+            setError(err.message);
+        }
+    };
+
+    const fetchMenus = async () => {
+        try {
+            const token = localStorage.getItem('access_token');
+
+            const response = await fetch(`${API_URL}/cardapio/db`, {
+                method: 'GET',
+                headers: { 'Authorization': `Bearer ${token}` },
+            });
+            if (!response.ok) throw new Error('Erro ao buscar cardápios');
+            const data = await response.json();
+            setMenus(data.data);
         } catch (err) {
             console.error(err);
             setError(err.message);
@@ -36,10 +47,12 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
     useEffect(() => {
         if (isOpen) {
             fetchPlaylists();
+            fetchMenus();
             if (device) {
                 setName(device.name);
                 setDescription(device.description);
-                setPlaylistId(device.playlist_id || ''); // Se não houver playlist, define como vazio
+                setPlaylistId(device.playlist_id || '');
+                setMenuId(device.cardapio_id || ''); 
             }
         }
     }, [isOpen, device]);
@@ -49,9 +62,15 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
         const updatedDevice = {
             name,
             description,
-            playlist_id: playlistId || null, // Se não tiver seleção, usa null
+            playlist_id: playlistId || null, 
+            menu_id: menuId || null, 
         };
-    
+
+        if (updatedDevice.playlist_id && updatedDevice.menu_id) {
+            alert('Um dispositivo pode ter apenas uma playlist ou um cardápio, mas não ambos.');
+            return;
+        }
+
         try {
             const token = localStorage.getItem('access_token');
             const response = await fetch(`${API_URL}/device/edit/${device.id}`, {
@@ -62,31 +81,22 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
                 },
                 body: JSON.stringify(updatedDevice),
             });
-    
-            if (!response.ok) {
-                const errorData = await response.json();
-                throw new Error(errorData.error || 'Erro ao atualizar dispositivo');
-            }
-    
+            if (!response.ok) throw new Error('Erro ao atualizar dispositivo');
             const data = await response.json();
-            console.log('Dispositivo atualizado:', data);
-    
-            // Chame onSave ou faça qualquer outra ação após a atualização
-            onSave(data.data); // Ou o que for necessário
-            onClose(); // Fecha o modal após salvar
+            onSave(data.data);
+            onClose();
         } catch (err) {
             console.error(err);
-            setError(err.message); // Exibe mensagem de erro, se houver
+            setError(err.message);
         }
     };
-    
 
-    if (!isOpen) return null; // Se o modal não estiver aberto, não renderiza nada
+    if (!isOpen) return null;
 
     return (
         <div className="modal">
             <h3>Editar Dispositivo</h3>
-            {error && <p className="error">{error}</p>} {/* Exibe mensagem de erro, se houver */}
+            {error && <p className="error">{error}</p>}
             <form onSubmit={handleSubmit}>
                 <div>
                     <label>
@@ -115,12 +125,34 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
                         Playlist:
                         <select
                             value={playlistId}
-                            onChange={(e) => setPlaylistId(e.target.value)}
+                            onChange={(e) => {
+                                setPlaylistId(e.target.value);
+                                setMenuId(''); 
+                            }}
                         >
-                            <option value="">Sem Playlist</option> {/* Opção para não associar a uma playlist */}
+                            <option value="">Sem Playlist</option>
                             {playlists.map((playlist) => (
                                 <option key={playlist.id} value={playlist.id}>
                                     {playlist.name}
+                                </option>
+                            ))}
+                        </select>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        Cardápio:
+                        <select
+                            value={menuId}
+                            onChange={(e) => {
+                                setMenuId(e.target.value);
+                                setPlaylistId(''); 
+                            }}
+                        >
+                            <option value="">Sem Cardápio</option>
+                            {menus.map((menu) => (
+                                <option key={menu.id} value={menu.id}>
+                                    {menu.name}
                                 </option>
                             ))}
                         </select>

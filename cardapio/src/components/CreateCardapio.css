@@ -1,0 +1,99 @@
+h1 {
+    text-align: center;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    width: 400px;
+    max-width: 90%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    display: 'flex';
+    flex-direction: column;
+    gap: 10px;
+}
+
+.add-categoria-container{
+    display: flex;
+}
+
+.input-nome-categoria{
+    flex: 3;
+    margin-right: 15px;
+}
+
+.add-categoria{
+    flex: 1;
+}
+
+.categoria-container {
+    margin-top: 20px;
+    border: 1px solid #ddd;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.categoria-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.produto-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 5px;
+    background-color: #f9f9f9;
+    margin-bottom: 10px;
+}
+
+.produto-item p {
+    margin: 2px;
+}
+
+.buttons-container{
+    margin-left: 10px;
+    display: flex;
+}
+
+button {
+    margin-top: 10px;
+    margin-right: 10px;
+}
+
+.add-button {
+    flex: 1;
+    background-color: #158D5C;
+}
+
+.add-button:hover {
+    background-color: #588601;
+}
+
+.remove-button {
+    flex: 1;
+    background-color: #E41E3F;
+}
+
+.remove-button:hover {
+    background-color: #CA3115;
+}
+
+.cardapio-save-btn{
+    margin-top: 50px;
+}

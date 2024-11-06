@@ -1,0 +1,89 @@
+.cardapio-list {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.cardapio-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.cardapio-info {
+    flex-grow: 1;
+}
+
+.cardapio-name {
+    font-size: 18px;
+    margin: 0;
+}
+
+.cardapio-description {
+    font-size: 14px;
+    margin: 5px 0;
+    color: #666;
+}
+
+.cardapio-actions {
+    display: flex;
+    gap: 10px;
+}
+
+.cardapio-edit,
+.cardapio-delete {
+    padding: 8px 15px;
+    font-size: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 5px;
+}
+
+.cardapio-edit {
+    color: white;
+}
+
+.cardapio-edit:hover {
+    
+}
+
+.fodase-o-verde{
+    background-color: #4CAF50;
+    background-color: #45a049;
+}
+
+.cardapio-delete {
+    background-color: #E41E3F;
+    color: white;
+}
+
+.cardapio-delete:hover {
+    background-color: #CA3115;
+}
+
+button:focus {
+    outline: none;
+}
+
+.add-button {
+    flex: 1;
+    background-color: #158D5C;
+}
+
+.add-button:hover {
+    background-color: #588601;
+}
+
+
+.remove-button {
+    flex: 1;
+    background-color: #E41E3F;
+}
+
+.remove-button:hover {
+    background-color: #CA3115;
+}
