@@ -1,5 +1,8 @@
 h1 {
     text-align: center;
+    font-size: 2.2em;
+    color: #333;
+    margin-bottom: 20px;
 }
 
 .overlay {
@@ -8,7 +11,7 @@ h1 {
     left: 0;
     right: 0;
     bottom: 0;
-    background-color: rgba(0, 0, 0, 0.5);
+    background-color: rgba(0, 0, 0, 0.6); /* Fundo mais escuro */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -17,83 +20,145 @@ h1 {
 
 .modal {
     background-color: #fff;
-    padding: 20px;
-    border-radius: 8px;
+    padding: 25px;
+    border-radius: 10px;
     width: 400px;
     max-width: 90%;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    display: 'flex';
-    flex-direction: column;
-    gap: 10px;
-}
-
-.add-categoria-container{
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3); /* Sombra mais suave */
     display: flex;
+    flex-direction: column;
+    gap: 15px;
+    animation: fadeIn 0.3s ease; /* Animação de fade */
 }
 
-.input-nome-categoria{
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.add-categoria-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.input-nome-categoria {
     flex: 3;
-    margin-right: 15px;
+    margin-right: 10px;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: border-color 0.3s ease;
 }
 
-.add-categoria{
+.input-nome-categoria:focus {
+    border-color: #357ABD; /* Cor de foco */
+    outline: none;
+}
+
+.add-categoria {
     flex: 1;
 }
 
 .categoria-container {
     margin-top: 20px;
+    padding: 15px;
     border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
+    background-color: #f4f7fa; /* Fundo suave */
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .categoria-header {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    font-weight: bold;
+    font-size: 1.1em;
+    color: #333;
 }
 
 .produto-item {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 5px;
-    background-color: #f9f9f9;
+    padding: 10px;
+    background-color: #ffffff;
     margin-bottom: 10px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s ease;
+}
+
+.produto-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
 }
 
 .produto-item p {
-    margin: 2px;
+    margin: 0;
+    font-size: 0.9em;
+    color: #555;
 }
 
-.buttons-container{
-    margin-left: 10px;
+.buttons-container {
     display: flex;
+    gap: 10px;
 }
 
 button {
-    margin-top: 10px;
-    margin-right: 10px;
+    padding: 10px 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+button:hover {
+    transform: scale(1.05);
 }
 
 .add-button {
-    flex: 1;
     background-color: #158D5C;
+    color: white;
 }
 
 .add-button:hover {
-    background-color: #588601;
+    background-color: #117747;
 }
 
 .remove-button {
-    flex: 1;
     background-color: #E41E3F;
+    color: white;
 }
 
 .remove-button:hover {
     background-color: #CA3115;
 }
 
-.cardapio-save-btn{
+.cardapio-save-btn {
     margin-top: 50px;
+    padding: 12px 20px;
+    background-color: #357ABD;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.cardapio-save-btn:hover {
+    background-color: #285a91;
+    transform: scale(1.05);
 }

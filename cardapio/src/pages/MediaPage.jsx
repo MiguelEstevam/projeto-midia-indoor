@@ -73,8 +73,15 @@ const MediaPage = () => {
 
   return (
     <div>
-      <div className="upload-container" style={{ display: isContentListVisible ? 'none' : 'block' }}>
-        <h2>Bem Vindo ao Gerenciador de Mídia!</h2>
+      <div
+        className="upload-container"
+        style={{
+          display: isContentListVisible ? 'none' : 'block',
+          fontFamily: "Candara, Calibri, Segoe, Segoe UI, Optima, Arial, sans-serif", // Define a fonte aqui
+          color: '#633' // Escolha uma cor de fonte atraente
+        }}
+      >
+        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Bem Vindo ao Gerenciador de Mídia!</h2>
         <div className="main-container">
           <HtmlUpload />
         </div>

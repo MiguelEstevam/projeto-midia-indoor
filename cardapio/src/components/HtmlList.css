@@ -1,121 +1,158 @@
 /* HtmlList.css */
 
+/* Container da lista */
 .html-list-container {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    flex: 1; 
-    padding: 10px;
-    box-sizing: border-box;
-    overflow: hidden;
-  }
-  
-  .html-list-header {
-    margin-bottom: 10px;
-  }
-  
-  .component-title{
-    text-align: center;
-  }
-  
-  .html-title {
-    display: flex;
-  }
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  flex: 1;
+  padding: 10px;
+  box-sizing: border-box;
+  overflow: hidden;
+  background-color: #fafafa; /* Cor de fundo mais suave */
+  border-radius: 10px; /* Borda arredondada no container */
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave no container */
+}
 
-  .html-info-container{
-    flex: 1;
-  }
+/* Cabeçalho da lista */
+.html-list-header {
+  margin-bottom: 20px;
+  text-align: center;
+}
 
-  .html-list {
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
-    max-height: 380px; 
-    overflow-y: auto;
-  }
-  
-  .html-item {
-    margin-bottom: 15px;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    position: relative; 
-  }
-  
-  .html-content {
-    margin-top: 10px;
-    border: 1px solid #ddd;
-    padding: 10px;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    overflow: hidden;
-  }
-  
-  .expand-icon {
-    cursor: pointer;
-    width: 20px; 
-    height: 20px; 
-    margin-right: 10px; 
-    position: relative;
-    transition: transform 0.3s ease;
-  }
-  
-  .expand-icon.rotated {
-    transform: rotate(90deg); 
-  }  
+/* Título do componente */
+.component-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: #333;
+}
 
-  .li-buttons{ 
-    display: flex;
-  }
+/* Estilo do item da lista */
+.html-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  max-height: 380px;
+  overflow-y: auto;
+}
 
-  .html-delete-button {
-    background-color: #E41E3F;
-    color: white;
-    border: none;
-    flex: 1;
-    height: 40px;
-    padding: 5px 10px;
-    margin-right: 10px;
-    border-radius: 5px;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
- 
-    top: 10px;
-    right: 10px;
-  }
-  
-  .html-delete-button:hover {
-    background-color: #CA3115;
-  }
-  
-  .html-delete-button:focus {
-    outline: none;
-  }
-  
-  .html-add-button{
-    background-color: #158D5C;
-    height: 40px;
-    flex: 1;
-  }
+/* Estilo de cada item na lista */
+.html-item {
+  margin-bottom: 20px;
+  padding: 15px;
+  border-radius: 8px;
+  background-color: #fff;
+  position: relative;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05); /* Sombra suave para destacar os itens */
+  transition: box-shadow 0.3s ease, transform 0.2s ease; /* Transição para interação */
+}
 
-  .html-add-button:hover{
-    background-color: #588601;
-  }
+.html-item:hover {
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Sombra mais forte no hover */
+  transform: translateY(-4px); /* Levantar o item quando passar o mouse */
+}
 
-  .load-more-button {
-    width: 100%;
-    padding: 10px;
-    border: none;
-    background-color: #357ABD;
-    color: white;
-    cursor: pointer;
-    font-size: 16px;
-    text-align: center;
-    margin-top: 10px;
-  }
-  
-  .load-more-button:disabled {
-    background-color: #c0c0c0;
-    cursor: not-allowed;
-  }
-  
+/* Estilo do conteúdo de cada item */
+.html-content {
+  margin-top: 10px;
+  border: 1px solid #ddd;
+  padding: 10px;
+  border-radius: 5px;
+  background-color: #f9f9f9;
+  overflow: hidden;
+}
+
+/* Estilo do ícone de expandir/colapsar */
+.expand-icon {
+  cursor: pointer;
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+  position: relative;
+  transition: transform 0.3s ease;
+}
+
+.expand-icon.rotated {
+  transform: rotate(90deg); /* Rotação no estado expandido */
+}
+
+/* Container dos botões de cada item */
+.li-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+/* Botão de excluir */
+.html-delete-button {
+  background-color: #E41E3F;
+  color: white;
+  border: none;
+  flex: 1;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.html-delete-button:hover {
+  background-color: #CA3115;
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.html-delete-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(228, 30, 63, 0.5); /* Foco mais visível e suave */
+}
+
+/* Botão de adicionar */
+.html-add-button {
+  background-color: #158D5C;
+  color: white;
+  height: 40px;
+  padding: 10px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.html-add-button:hover {
+  background-color: #588601;
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.html-add-button:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(21, 141, 92, 0.5); /* Foco mais visível e suave */
+}
+
+/* Botão de carregar mais */
+.load-more-button {
+  width: 100%;
+  padding: 12px;
+  border: none;
+  background-color: #357ABD;
+  color: white;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  margin-top: 10px;
+  border-radius: 5px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.load-more-button:hover {
+  background-color: #2C6A9F;
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.load-more-button:disabled {
+  background-color: #c0c0c0;
+  cursor: not-allowed;
+}
+
+/* Botão de carregamento (efeito de desabilitado) */
+.load-more-button:active {
+  transform: scale(0.98); /* Efeito de compressão ao pressionar */
+}

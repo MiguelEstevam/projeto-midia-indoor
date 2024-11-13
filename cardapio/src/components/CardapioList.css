@@ -1,6 +1,9 @@
 .cardapio-list {
     font-family: Arial, sans-serif;
-    padding: 20px;
+    padding: 25px;
+    background-color: #f0f4f8; /* Fundo claro */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
 }
 
 .cardapio-item {
@@ -8,10 +11,17 @@
     justify-content: space-between;
     align-items: center;
     margin-bottom: 15px;
-    padding: 10px;
+    padding: 15px;
     border: 1px solid #ddd;
-    border-radius: 5px;
-    background-color: #f9f9f9;
+    border-radius: 8px;
+    background-color: #ffffff; /* Fundo mais claro */
+    transition: transform 0.2s ease;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cardapio-item:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
 .cardapio-info {
@@ -19,41 +29,42 @@
 }
 
 .cardapio-name {
-    font-size: 18px;
+    font-size: 1.2em;
+    font-weight: bold;
     margin: 0;
+    color: #333;
 }
 
 .cardapio-description {
-    font-size: 14px;
+    font-size: 0.9em;
     margin: 5px 0;
     color: #666;
 }
 
 .cardapio-actions {
     display: flex;
-    gap: 10px;
+    gap: 12px;
 }
 
 .cardapio-edit,
 .cardapio-delete {
-    padding: 8px 15px;
-    font-size: 14px;
+    padding: 10px 15px;
+    font-size: 0.9em;
     cursor: pointer;
     border: none;
     border-radius: 5px;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .cardapio-edit {
+    background-color: #357ABD;
     color: white;
 }
 
 .cardapio-edit:hover {
-    
-}
-
-.fodase-o-verde{
-    background-color: #4CAF50;
-    background-color: #45a049;
+    background-color: #13508d;
+    transform: scale(1.05);
 }
 
 .cardapio-delete {
@@ -63,27 +74,46 @@
 
 .cardapio-delete:hover {
     background-color: #CA3115;
+    transform: scale(1.05);
 }
 
 button:focus {
     outline: none;
+    box-shadow: 0 0 0 4px rgba(0, 123, 255, 0.25); /* Foco suave */
 }
 
 .add-button {
     flex: 1;
     background-color: #158D5C;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .add-button:hover {
-    background-color: #588601;
+    background-color: #117747;
+    transform: scale(1.05);
 }
-
 
 .remove-button {
     flex: 1;
     background-color: #E41E3F;
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .remove-button:hover {
     background-color: #CA3115;
+    transform: scale(1.05);
 }

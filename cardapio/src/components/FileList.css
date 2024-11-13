@@ -3,18 +3,27 @@
     flex-direction: column;
     width: 100%;
     flex: 1; 
-    padding: 10px;
+    padding: 15px;
     box-sizing: border-box;
     overflow: hidden;
+    background-color: #f1f3f5; /* Fundo suave */
+    border-radius: 8px;
 }
 
 .file-list-header {
     flex-shrink: 0;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
+    font-weight: bold;
+    font-size: 1.5em;
+    text-align: center;
+    color: #333;
 }
 
-.component-title{
+.component-title {
     text-align: center;
+    font-size: 1.4em;
+    font-weight: 600;
+    color: #213547;
 }
 
 .file-list {
@@ -23,10 +32,11 @@
     list-style-type: none;
     padding: 0;
     flex-grow: 1;
-    overflow-y: auto; 
+    overflow-y: auto;
     overflow-x: hidden;
     display: flex;
     flex-direction: column;
+    gap: 10px;
 }
 
 .file-list li {
@@ -37,37 +47,50 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #f9f9f9;
-    padding: 10px;
+    background-color: #ffffff;
+    padding: 15px;
     margin-bottom: 10px;
-    border-radius: 5px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.file-item:hover {
+    transform: translateY(-3px);
 }
 
 .file-item a {
-    color: black;
+    color: #357ABD;
     text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s ease;
 }
 
 .file-item a:hover {
     text-decoration: underline;
+    color: #2C6A9F;
 }
 
 .file-link {
     display: flex;
     align-items: center;
-    background-color: #f9f9f9;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    background-color: #fafafa;
+    padding: 0.7rem 1.2rem;
+    border-radius: 6px;
     text-decoration: none;
-    transition: background-color 0.3s ease-in-out;
+    transition: background-color 0.3s ease;
     font-weight: bold;
     justify-content: space-between;
-    width: 100%; 
+    width: 100%;
+}
+
+.file-link:hover {
+    background-color: #f0f8ff;
 }
 
 .file-link img,
 .file-link video {
-    width: 100px;
+    width: 90px;
     height: auto;
     max-height: 70px;
     border-radius: 5px;
@@ -75,19 +98,30 @@
 
 .file-link span {
     flex-grow: 1;
-    margin-left: 10px;
+    margin-left: 15px;
+    font-size: 1em;
+    color: #213547;
 }
 
 .load-more-button {
     width: 100%;
-    padding: 10px;
+    padding: 12px;
     border: none;
     background-color: #357ABD;
     color: white;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 1.1em;
+    font-weight: bold;
     text-align: center;
-    margin-top: 10px;
+    margin-top: 15px;
+    border-radius: 8px;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.load-more-button:hover {
+    background-color: #2C6A9F;
+    transform: scale(1.03);
 }
 
 .load-more-button:disabled {
@@ -95,8 +129,9 @@
     cursor: not-allowed;
 }
 
-.li-buttons{
+.li-buttons {
     display: flex;
+    gap: 10px;
 }
 
 .file-delete-button {
@@ -105,28 +140,43 @@
     height: 40px;
     color: white;
     border: none;
-    padding: 5px 10px;
+    padding: 8px 12px;
     margin-right: 10px;
     border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .file-delete-button:hover {
     background-color: #CA3115;
+    transform: scale(1.05);
 }
 
-.delete-button:focus {
+.file-delete-button:focus {
     outline: none;
+    box-shadow: 0 0 0 4px rgba(228, 30, 63, 0.3);
 }
 
 .file-add-button {
     background-color: #158D5C;
     flex: 1;
+    height: 40px;
+    color: white;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 .file-add-button:hover {
-    background-color: #588601;
+    background-color: #117747;
+    transform: scale(1.05);
+}
+
+.file-add-button:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(21, 141, 92, 0.3);
 }
 
 .modal {
@@ -136,8 +186,10 @@
     left: 50%;
     transform: translate(-50%, -50%);
     background-color: white;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    padding: 25px;
+    border-radius: 8px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     z-index: 1000;
-  }
-  
+    width: 90%;
+    max-width: 500px;
+}

@@ -2,18 +2,32 @@
 ul.content-list {
   list-style-type: none;
   padding: 0;
+  margin: 0;
+  background-color: #f4f4f4; /* Fundo suave para a lista */
+  border-radius: 10px; /* Borda arredondada no container */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra suave no container da lista */
 }
 
+/* Estilo dos itens da lista */
 li.content-item {
   border: 1px solid #ddd;
-  padding: 10px;
-  margin-bottom: 10px;
+  padding: 15px;
+  margin-bottom: 15px;
   border-radius: 8px;
   display: flex;
   align-items: center;
   justify-content: space-between;
+  background-color: #ffffff; /* Fundo branco para os itens */
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05); /* Sombra suave para destacar cada item */
+  transition: box-shadow 0.3s ease, transform 0.2s ease;
 }
 
+li.content-item:hover {
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Sombra mais forte no hover */
+  transform: translateY(-4px); /* Levantar o item suavemente */
+}
+
+/* Estilo das informações do conteúdo */
 .content-info {
   flex: 1;
   display: flex;
@@ -21,49 +35,99 @@ li.content-item {
 }
 
 .content-info img {
-  margin-right: 10px;
+  margin-right: 15px;
+  width: 50px;
+  height: 50px;
   object-fit: cover;
-  border-radius: 8px;
+  border-radius: 50%; /* Imagem arredondada */
+  border: 2px solid #ddd; /* Borda suave na imagem */
+  transition: transform 0.3s ease;
+}
+
+.content-info img:hover {
+  transform: scale(1.05); /* Efeito de zoom na imagem */
 }
 
 .content-info p {
   margin: 0;
+  font-size: 1rem;
+  color: #333; /* Cor de texto mais escura para melhorar a legibilidade */
 }
 
+/* Estilo do conteúdo adicional */
 .html-content {
-  max-height: 100px;
+  max-height: 120px;
   overflow-y: auto;
-  background: #f9f9f9;
-  padding: 5px;
+  background: #fafafa;
+  padding: 10px;
   border-radius: 8px;
-  margin-top: 5px;
+  margin-top: 10px;
+  border: 1px solid #ddd; /* Borda suave para o conteúdo */
+  font-size: 0.9rem;
+  color: #555;
+  transition: background-color 0.3s ease;
 }
 
+.html-content:hover {
+  background-color: #f1f1f1; /* Leve alteração de cor ao passar o mouse */
+}
+
+/* Estilo para o campo de duração */
 .duration-input {
-  width: 60px;
-  margin-left: 5px;
-  padding: 5px;
-  border-radius: 4px;
+  width: 70px;
+  padding: 8px;
+  border-radius: 5px;
   border: 1px solid #ccc;
+  font-size: 0.9rem;
+  color: #333;
+  transition: border-color 0.3s ease, box-shadow 0.2s ease;
 }
 
+.duration-input:focus {
+  outline: none;
+  border-color: #357ABD; /* Borda azul ao focar */
+  box-shadow: 0 0 0 3px rgba(53, 122, 189, 0.2); /* Sombra de foco suave */
+}
+
+/* Estilo do botão de remover */
 .remove-btn {
-  margin-top: 5px;
   background: #ff4d4d;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 8px 15px;
+  border-radius: 5px;
   cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.remove-btn:hover {
+  background: #d43f3a;
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.remove-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(255, 77, 77, 0.5); /* Foco visível e suave */
+}
+
+/* Estilo do botão de toggle (expandir/colapsar) */
 .toggle-btn {
   background: #357ABD;
   color: white;
   border: none;
-  padding: 5px 10px;
-  border-radius: 4px;
+  padding: 8px 15px;
+  border-radius: 5px;
   cursor: pointer;
-  margin-top: 5px;
+  margin-top: 10px;
+  transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
+.toggle-btn:hover {
+  background: #2C6A9F;
+  transform: scale(1.05); /* Efeito de aumento no hover */
+}
+
+.toggle-btn:focus {
+  outline: none;
+  box-shadow: 0 0 0 4px rgba(53, 122, 189, 0.5); /* Foco visível e suave */
+}

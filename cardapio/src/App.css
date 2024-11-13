@@ -23,6 +23,8 @@ body {
   box-shadow: 0px 10px 30px rgba(0, 0, 0, 0.1);
   box-sizing: border-box; /* Garante que padding seja incluído na largura total */
   overflow: hidden;
+  opacity: 1;
+  animation: fadeIn 0.8s ease-out forwards;
 }
 
 /* Layout horizontal para os componentes principais */
@@ -67,27 +69,38 @@ h2 {
 
 /* Estilo dos botões */
 button {
-  background-color: #357ABD; 
-  color: #fff;
-  border: none;
-  padding: 1rem 2rem;
-  border-radius: 10px;
-  cursor: pointer;
-  transition: background-color 0.3s ease-in-out;
-  font-size: 1.1rem;
-  width: 100%;
-  font-weight: bold;
-  margin-top: 1rem;
-  margin-bottom: 5px;
+  background-color: #357ABD; /* Cor de fundo */
+  color: #fff; /* Cor do texto */
+  border: none; /* Remover bordas */
+  padding: 1rem 2rem; /* Espaçamento interno */
+  border-radius: 12px; /* Bordas arredondadas */
+  cursor: pointer; /* Cursor de clique */
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte elegante e moderna */
+  font-size: 1.2rem; /* Tamanho da fonte */
+  font-weight: bold; /* Negrito */
+  width: 100%; /* Largura completa */
+  margin-top: 1rem; /* Espaço acima */
+  margin-bottom: 5px; /* Espaço abaixo */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra sutil para destaque */
+  transition: background-color 0.3s ease, transform 0.2s ease-in-out; /* Transições suaves */
 }
 
 button:hover {
-  background-color: #2e6da4; /* Tom mais escuro para o hover */
+  background-color: #2C6A9F; /* Cor de fundo mais escura no hover */
+  transform: translateY(-4px); /* Levantar o botão levemente */
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* Sombra mais forte ao passar o mouse */
 }
 
+/* Efeito ao pressionar o botão */
+button:active {
+  transform: translateY(0); /* Retorna à posição original */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2); /* Sombra mais suave ao pressionar */
+}
+
+/* Estilo de foco (quando o botão é selecionado) */
 button:focus {
-  outline: none;
-  box-shadow: 0 0 0 2px #c9e0f3;
+  outline: none; /* Remove a borda de foco padrão */
+  box-shadow: 0 0 0 4px rgba(53, 122, 189, 0.6); /* Destacar com uma borda de foco personalizada */
 }
 
 /* Estilo dos Inputs */
