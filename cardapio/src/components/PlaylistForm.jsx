@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import { API_URL } from '../config';
 import { Link } from 'react-router-dom';
-import './PlaylistForm.css'; // Importando o arquivo de estilo
+import './PlaylistForm.css'; 
+import AlertModal from './AlertModal'; // Importando o componente de modal
 
 const PlaylistForm = ({ onAddPlaylist }) => {
   const [playlistName, setPlaylistName] = useState('');
@@ -10,7 +11,9 @@ const PlaylistForm = ({ onAddPlaylist }) => {
   const [isEditing, setIsEditing] = useState(true);
   const [baseUrl, setBaseUrl] = useState('');
   const [contents, setContents] = useState([]);
+  const [tempDurations, setTempDurations] = useState({});
   const [error, setError] = useState('');
+  const [successMessage, setSuccessMessage] = useState('');
   const [expandedHtmlContent, setExpandedHtmlContent] = useState(null);
   const navigate = useNavigate();
   const { id } = useParams();
@@ -43,7 +46,6 @@ const PlaylistForm = ({ onAddPlaylist }) => {
         setContents(data.contents || []);
 
       } catch (err) {
-        window.alert(`Erro ao buscar pela playlist ${id}: ` + err.message);
         setError(err.message);
         navigate('/playlists');
       }
@@ -55,10 +57,12 @@ const PlaylistForm = ({ onAddPlaylist }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const token = localStorage.getItem('access_token');
-
-    if (isEditing) {
-      try {
-        const response = await fetch(`${API_URL}/playlist/edit/${id}`, {
+  
+    try {
+      let response;
+  
+      if (isEditing) {
+        response = await fetch(`${API_URL}/playlist/edit/${id}`, {
           method: 'PUT',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -69,21 +73,28 @@ const PlaylistForm = ({ onAddPlaylist }) => {
             description: playlistDescription,
           }),
         });
-
+  
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Erro ao editar a playlist');
         }
-
-        alert('Playlist editada com sucesso!');
-        navigate('/playlists');
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
-      }
-    } else {
-      try {
-        const response = await fetch(`${API_URL}/upload/playlist`, {
+  
+        // Atualização de duração de conteúdos
+        for (const contentId in tempDurations) {
+          const newDuration = tempDurations[contentId];
+          await fetch(`${API_URL}/content_assignment/${contentId}/duration`, {
+            method: 'PUT',
+            headers: {
+              'Authorization': `Bearer ${token}`,
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ duration: newDuration }),
+          });
+        }
+  
+        setSuccessMessage('Playlist editada com sucesso!');
+      } else {
+        response = await fetch(`${API_URL}/upload/playlist`, {
           method: 'POST',
           headers: {
             'Authorization': `Bearer ${token}`,
@@ -94,36 +105,62 @@ const PlaylistForm = ({ onAddPlaylist }) => {
             description: playlistDescription,
           }),
         });
-
+  
         if (!response.ok) {
           const errorData = await response.json();
           throw new Error(errorData.error || 'Erro ao criar a playlist');
         }
-
-        const newPlaylist = await response.json(); // Pega a nova playlist do retorno
-        onAddPlaylist(newPlaylist.data[0]); // Chama a função para adicionar a nova playlist à lista
-        alert('Playlist criada com sucesso!');
-        setPlaylistName(''); // Limpa os campos após criar
+  
+        const newPlaylist = await response.json();
+        onAddPlaylist(newPlaylist.data[0]);
+  
+        setSuccessMessage('Playlist criada com sucesso!');
+        setPlaylistName('');
         setPlaylistDescription('');
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
       }
+  
+      setTimeout(() => {
+        setSuccessMessage('');
+      }, 3000);
+    } catch (err) {
+      setError(err.message);
     }
   };
 
   const handleDurationChange = async (contentId, newDuration) => {
-    const updatedContents = contents.map(content =>
-      content.ca_id === contentId ? { ...content, duration: newDuration } : content
-    );
-    setContents(updatedContents);
-  };
-
-  const handleRemoveContent = async (contentId, contentType) => {
     const token = localStorage.getItem('access_token');
 
     try {
-      const response = await fetch(`${API_URL}/playlist/${id}/delete/${contentType}/${contentId}`, {
+      const response = await fetch(`${API_URL}/content_assignment/${contentId}/duration`, {
+        method: 'PUT',
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ duration: newDuration }),
+      });
+
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Erro ao atualizar a duração');
+      }
+
+      const updatedContents = contents.map(content =>
+        content.ca_id === contentId ? { ...content, duration: newDuration } : content
+      );
+      setContents(updatedContents);
+
+      setSuccessMessage('Duração atualizada com sucesso!');
+    } catch (err) {
+      setError(err.message);
+    }
+  };
+
+  const handleRemoveContent = async (assignmentId) => {
+    const token = localStorage.getItem('access_token');
+
+    try {
+      const response = await fetch(`${API_URL}/playlist/${id}/delete/${assignmentId}`, {
         method: 'DELETE',
         headers: {
           'Authorization': `Bearer ${token}`,
@@ -135,20 +172,9 @@ const PlaylistForm = ({ onAddPlaylist }) => {
         throw new Error(errorData.error || 'Erro ao remover o conteúdo da playlist');
       }
 
-      // Atualizando a lista local de conteúdos após remoção
-      setContents(contents.filter(content => {
-        if (contentType === 'file' && content.media) {
-          return content.media.id !== contentId;
-        }
-        if (contentType === 'html' && content.html) {
-          return content.html.id !== contentId;
-        }
-        return true;
-      }));
+      setContents(contents.filter(content => content.ca_id !== assignmentId));
 
-      alert('Conteúdo removido com sucesso!');
     } catch (err) {
-      console.error(err);
       setError(err.message);
     }
   };
@@ -184,9 +210,11 @@ const PlaylistForm = ({ onAddPlaylist }) => {
       <Link to={isEditing ? '/playlists' : '/media'}>
         <button className="go-back-btn">Voltar</button>
       </Link>
+      <br /><br />
       <h2>{isEditing ? 'Editar Playlist' : 'Criar Nova Playlist'}</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-
+      {error && <AlertModal message={error} type="Error" />}
+      {successMessage && <AlertModal message={successMessage} type="Success" />}
+      
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -205,7 +233,8 @@ const PlaylistForm = ({ onAddPlaylist }) => {
         <button type="submit">{isEditing ? 'Salvar' : 'Criar'}</button>
       </form>
 
-      <h3>{isEditing ? 'Conteúdos da Playlist' : 'Playlists'}</h3>
+      <br />
+      <h3>{isEditing ? 'Conteúdos da Playlist' : 'Playlists Salvas:'}</h3>
       <ul className="content-list">
         {contents.map(content => (
           <li key={content.ca_id} className="content-item">
@@ -240,15 +269,19 @@ const PlaylistForm = ({ onAddPlaylist }) => {
                 Duração:
                 <input
                   type="number"
-                  value={content.duration}
-                  onChange={(e) => handleDurationChange(content.ca_id, parseInt(e.target.value))}
+                  value={tempDurations[content.ca_id] ?? content.duration}
+                  onChange={(e) => setTempDurations({
+                    ...tempDurations,
+                    [content.ca_id]: parseInt(e.target.value),
+                  })}
                   min="0"
                   className="duration-input"
-                /> segundos
+                />
+                segundos
               </p>
 
               <button
-                onClick={() => handleRemoveContent(content.media ? content.media.id : content.html.id, content.contentType)}
+                onClick={() => handleRemoveContent(content.ca_id)}
                 className="remove-btn"
               >
                 Remover

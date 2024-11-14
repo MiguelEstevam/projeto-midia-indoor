@@ -1,111 +1,71 @@
-/* Fonte personalizada */
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
-
-body {
-    font-family: 'Poppins', sans-serif;
+/* Estilo geral da lista */
+li {
+    list-style-type: none; /* Remove os marcadores padrão */
 }
 
-/* Contêiner da playlist */
-.playlist-container {
+/* Contêiner de cada item da playlist */
+.li-playlist-container {
     display: flex;
-    width: 100%;
-    gap: 20px; /* Espaço entre as colunas */
-    align-items: center; /* Alinha verticalmente o conteúdo */
-    justify-content: space-between; /* Espaço igual entre os itens */
+    align-items: center;
+    padding: 10px;
+    margin-bottom: 10px;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+    transition: box-shadow 0.3s ease;
+}
+
+/* Efeito de hover para destacar o item */
+.li-playlist-container:hover {
+    box-shadow: 0px 6px 15px rgba(0, 0, 0, 0.15);
 }
 
 /* Contêiner das informações da playlist */
-.info-playlist-container {
-    flex: 3;
-    padding: 20px;
-    background-color: #f9f9f9; /* Fundo suave */
-    border-radius: 10px; /* Bordas arredondadas maiores */
-    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1); /* Sombra suave */
-    transition: transform 0.3s ease;
-}
-
-.info-playlist-container:hover {
-    transform: scale(1.02); /* Leve aumento no hover */
-}
-
-/* Contêiner dos botões de ação */
-.button-container {
-    flex: 2;
-    display: flex;
-    gap: 15px; /* Espaçamento entre os botões */
-    flex-direction: column; /* Organiza os botões em coluna */
-    justify-content: flex-start; /* Alinha os botões no topo */
-}
-
-/* Título da playlist */
-h2 {
-    margin-top: 50px;
-    font-size: 2.2rem;
-    color: #333; /* Cor mais escura para o título */
-    font-weight: 700; /* Fonte mais espessa */
-}
-
-/* Links */
-a {
+.playlist-info-container {
     flex: 1;
-    text-decoration: none; /* Remove o sublinhado do link */
-    color: #357ABD; /* Cor azul padrão */
-    font-weight: 600; /* Fonte mais espessa */
-    transition: color 0.3s ease, transform 0.2s ease; /* Transição suave de cor e transformação */
+    padding: 10px;
+    font-family: 'Arial', sans-serif;
+    color: #333;
 }
 
-a:hover {
-    color: #2C6A9F; /* Cor mais escura quando o link é hover */
-    transform: scale(1.05); /* Leve aumento no hover */
+/* Contêiner dos botões */
+.edit-delete-btn-container {
+    flex: 0.2;
+    display: flex;
+    gap: 10px;
+    justify-content: end;
+    align-items: center;
 }
 
-/* Botão de editar playlist */
-.edit-playlist-button {
-    font-size: 15px;
-    padding: 12px 24px; /* Aumenta o tamanho e espaçamento do botão */
+/* Estilos dos botões */
+.edit-delete-btn-container button {
+    padding: 8px 12px;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Estilo do botão Editar */
+.edit-delete-btn-container .edit-btn {
     background-color: #357ABD;
-    color: white;
-    border: none;
-    border-radius: 8px; /* Bordas mais arredondadas */
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    box-shadow: 0 4px 10px rgba(53, 122, 189, 0.3);
-    font-weight: 600;
 }
 
-.edit-playlist-button:hover {
-    background-color: #2C6A9F; /* Cor mais escura no hover */
-    transform: scale(1.05); /* Efeito de aumentar no hover */
-    box-shadow: 0 6px 15px rgba(53, 122, 189, 0.4);
+.edit-delete-btn-container .edit-btn:hover {
+    background-color: #2d6ca4;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-.edit-playlist-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(53, 122, 189, 0.3); /* Efeito de foco suave */
+/* Estilo do botão Deletar */
+.edit-delete-btn-container .delete-btn {
+    background-color: #E41E3F;
 }
 
-/* Botão de excluir playlist */
-.delete-playlist-button {
-    background-color: #E41E3F; /* Cor vermelha */
-    color: white;
-    height: 50px; /* Aumenta a altura do botão */
-    padding: 12px 24px; /* Maior padding para maior conforto */
-    font-size: 16px; /* Aumenta o tamanho da fonte */
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
-    font-weight: 600;
-    box-shadow: 0 4px 10px rgba(228, 30, 63, 0.3);
-}
-
-.delete-playlist-button:hover {
-    background-color: #CA3115; /* Cor mais escura */
-    transform: scale(1.05); /* Efeito de aumento no hover */
-    box-shadow: 0 6px 15px rgba(228, 30, 63, 0.4);
-}
-
-.delete-playlist-button:focus {
-    outline: none;
-    box-shadow: 0 0 0 4px rgba(228, 30, 63, 0.3); /* Efeito de foco suave */
+.edit-delete-btn-container .delete-btn:hover {
+    background-color: #CA3115;
+    transform: scale(1.05);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
 }

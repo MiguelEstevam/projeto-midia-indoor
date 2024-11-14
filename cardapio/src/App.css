@@ -167,6 +167,10 @@ a:hover {
   color: #2e6da4;
 }
 
+ul {
+  list-style: none;
+}
+
 /* Estilo do rodapé ou mensagens */
 .read-the-docs {
   color: #888;

@@ -9,7 +9,7 @@
   padding: 10px;
   box-sizing: border-box;
   overflow: hidden;
-  background-color: #fafafa; /* Cor de fundo mais suave */
+  background-color: #f1f3f5; /* Cor de fundo mais suave */
   border-radius: 10px; /* Borda arredondada no container */
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* Sombra suave no container */
 }
@@ -27,13 +27,18 @@
   color: #333;
 }
 
+.html-title {
+  display: flex;
+}
+
 /* Estilo do item da lista */
 .html-list {
   list-style-type: none;
   padding: 0;
   margin: 0;
-  max-height: 380px;
+  max-height: 400px;
   overflow-y: auto;
+  overflow-x: hidden;
 }
 
 /* Estilo de cada item na lista */
@@ -60,8 +65,12 @@
   border-radius: 5px;
   background-color: #f9f9f9;
   overflow: hidden;
+  min-height: 200px;
 }
 
+.html-info-container {
+  flex: 1;
+}
 /* Estilo do ícone de expandir/colapsar */
 .expand-icon {
   cursor: pointer;

@@ -30,7 +30,6 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
     const fetchMenus = async () => {
         try {
             const token = localStorage.getItem('access_token');
-
             const response = await fetch(`${API_URL}/cardapio/db`, {
                 method: 'GET',
                 headers: { 'Authorization': `Bearer ${token}` },
@@ -67,7 +66,7 @@ const EditDeviceModal = ({ isOpen, onClose, device, onSave }) => {
         };
 
         if (updatedDevice.playlist_id && updatedDevice.menu_id) {
-            alert('Um dispositivo pode ter apenas uma playlist ou um cardápio, mas não ambos.');
+            console.error('O dispositivo não pode ter uma Playlist e um Cardápio ao mesmo tempo.');
             return;
         }
 

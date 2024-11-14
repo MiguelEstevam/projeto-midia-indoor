@@ -81,7 +81,7 @@ const MediaPage = () => {
           color: '#633' // Escolha uma cor de fonte atraente
         }}
       >
-        <h2 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Bem Vindo ao Gerenciador de Mídia!</h2>
+        <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Bem Vindo ao Gerenciador de Mídia!</h1>
         <div className="main-container">
           <HtmlUpload />
         </div>
@@ -90,6 +90,7 @@ const MediaPage = () => {
 
       <div className="content-list-container" style={{ display: isContentListVisible ? 'block' : 'none' }}>
         <FileList />
+        <br />
         <HtmlList />
       </div>
 

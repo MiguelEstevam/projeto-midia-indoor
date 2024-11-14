@@ -23,6 +23,7 @@ const CardapiosPage = () => {
                     <Link to="/media">
                         <button className="go-back-btn">Voltar</button>
                     </Link>
+                    <br /><br />
                     <h2>Gerenciar Cardápios</h2>
                 </div>
             ) : (

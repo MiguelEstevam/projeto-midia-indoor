@@ -8,7 +8,7 @@ const DeviceList = ({ devices, onDelete, onEdit }) => {
                 <li key={device.id}>
                   <div className="li-device-container">
                     <div className='device-info-container'>
-                        <p><strong>Nome:</strong> {device.name || 'Nome não disponível'}</p>
+                        <h2>{device.name || 'Nome não disponível'}</h2>
                         <p><strong>Descrição:</strong> {device.description || 'Descrição não disponível'}</p>
                     </div>
                     <div className='edit-delete-btn-container'>

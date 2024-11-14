@@ -138,7 +138,7 @@ const HtmlList = () => {
   return (
     <div className="html-list-container">
       <header className="html-list-header">
-        <h2 className="component-title">HTML Contents</h2>
+        <h2 className="component-title">HTML's Enviados</h2>
       </header>
       {loading && !contents.length ? (
         <p>Loading contents...</p>

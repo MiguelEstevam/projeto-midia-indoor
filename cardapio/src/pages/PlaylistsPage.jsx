@@ -1,11 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PlaylistForm from '../components/PlaylistForm';
 import PlaylistList from '../components/PlaylistList';
-import { API_URL } from '../config'; 
+import { API_URL } from '../config';
+import AlertModal from '../components/AlertModal';
 
 const PlaylistsPage = () => {
   const [playlists, setPlaylists] = useState([]);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
 
   useEffect(() => {
     const fetchPlaylists = async () => {
@@ -52,7 +54,12 @@ const PlaylistsPage = () => {
 
       // Atualiza a lista de playlists após a exclusão
       setPlaylists(playlists.filter((playlist) => playlist.id !== id));
-      alert('Playlist excluída com sucesso!');
+      setSuccess('Playlist excluída com sucesso!');
+
+      // Limpa a mensagem de sucesso após 5 segundos
+      setTimeout(() => {
+        setSuccess('');
+      }, 3000);
     } catch (err) {
       console.error(err);
       setError(err.message);
@@ -61,14 +68,29 @@ const PlaylistsPage = () => {
 
   const handleAddPlaylist = (newPlaylist) => {
     // Adiciona a nova playlist à lista existente
-    setPlaylists((prevPlaylists) => [...prevPlaylists, newPlaylist]);
+    setPlaylists((prevPlaylists) => [newPlaylist, ...prevPlaylists ]);
+    setSuccess('Playlist criada com sucesso!');
+
+    // Limpa a mensagem de sucesso após 5 segundos
+    setTimeout(() => {
+      setSuccess('');
+    }, 5000);
   };
 
   return (
     <div>
-      <div className="playlists-nav">
-      </div>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
+      <div className="playlists-nav"></div>
+      {(error || success) && (
+        <AlertModal
+          message={error || success}
+          type={error ? 'Error' : 'success'}
+          duration={5000}
+          onClose={() => {
+            setError('');
+            setSuccess('');
+          }}
+        />
+      )}
       <PlaylistForm onAddPlaylist={handleAddPlaylist} />
       <PlaylistList playlists={playlists} onDelete={handleDelete} />
     </div>

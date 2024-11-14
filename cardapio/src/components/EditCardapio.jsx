@@ -171,7 +171,7 @@ const EditCardapio = () => {
                                 <div className="info-produto">
                                     <p><b>Nome: </b> {prod.nome}</p>
                                     <p><b>Descrição: </b> {prod.descricao}</p>
-                                    <p><b>Preço: </b>R$ {prod.preco}</p>  
+                                    <p><b>Preço: </b>R$ {(Number(prod.preco) || 0).toFixed(2)}</p>  
                                 </div>
                                 <div className="buttons-container">
                                     <button className="remove-button" onClick={() => handleRemoveProduto(index, idx)}>Remover</button>

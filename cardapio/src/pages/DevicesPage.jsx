@@ -4,10 +4,12 @@ import DeviceList from '../components/DeviceList';
 import EditDeviceModal from '../components/EditDeviceModal';
 import { Link } from 'react-router-dom';
 import { API_URL } from '../config';
+import AlertModal from '../components/AlertModal';
 
 const DevicesPage = () => {
     const [devices, setDevices] = useState([]);
     const [error, setError] = useState('');
+    const [success, setSuccess] = useState('');
     const [selectedDevice, setSelectedDevice] = useState(null);
     const [isModalOpen, setModalOpen] = useState(false);
 
@@ -40,7 +42,6 @@ const DevicesPage = () => {
     const handleAddDevice = (newDeviceResponse) => {
         const newDevice = newDeviceResponse.data[0];
         setDevices((prevDevices) => [
-            ...prevDevices,
             {
                 id: newDevice.id,
                 name: newDevice.name || 'Nome não disponível',
@@ -48,7 +49,9 @@ const DevicesPage = () => {
                 created_at: newDevice.created_at,
                 playlist_id: newDevice.playlist_id,
             },
+            ...prevDevices,
         ]);
+        setSuccess('Dispositivo adicionado com sucesso!');
     };
 
     const handleDeleteDevice = async (id) => {
@@ -68,7 +71,7 @@ const DevicesPage = () => {
             }
 
             setDevices((prevDevices) => prevDevices.filter((device) => device.id !== id));
-            alert('Dispositivo excluído com sucesso!');
+            setSuccess('Dispositivo excluído com sucesso!');
         } catch (error) {
             console.error('Erro ao excluir dispositivo:', error);
             setError(error.message);
@@ -111,7 +114,7 @@ const DevicesPage = () => {
                 )
             );
 
-            alert('Dispositivo atualizado com sucesso!');
+            setSuccess('Dispositivo atualizado com sucesso!');
             setModalOpen(false); // Fecha o modal após salvar
         } catch (error) {
             console.error('Erro ao atualizar dispositivo:', error);
@@ -124,8 +127,21 @@ const DevicesPage = () => {
             <Link to="/media">
                 <button className="go-back-btn">Voltar</button>
             </Link>
-            {error && <p style={{ color: 'red' }}>{error}</p>}
+            {(error || success) && (
+                <AlertModal
+                    message={error || success}
+                    type={error ? 'error' : 'success'}
+                    duration={5000}
+                    onClose={() => {
+                        setError('');
+                        setSuccess('');
+                    }}
+                />
+            )}
+            <br /><br />
             <AddDevice onAdd={handleAddDevice} />
+            <br />
+            <h3>Dispositivos Salvos:</h3>
             <DeviceList
                 devices={devices}
                 onDelete={handleDeleteDevice}
@@ -134,7 +150,7 @@ const DevicesPage = () => {
             <EditDeviceModal
                 isOpen={isModalOpen}
                 onClose={() => setModalOpen(false)}
-                device={selectedDevice} // Passando o dispositivo corretamente
+                device={selectedDevice}
                 onSave={handleSaveDevice}
             />
         </div>

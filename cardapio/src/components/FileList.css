@@ -74,7 +74,6 @@
 .file-link {
     display: flex;
     align-items: center;
-    background-color: #fafafa;
     padding: 0.7rem 1.2rem;
     border-radius: 6px;
     text-decoration: none;
@@ -84,9 +83,7 @@
     width: 100%;
 }
 
-.file-link:hover {
-    background-color: #f0f8ff;
-}
+
 
 .file-link img,
 .file-link video {

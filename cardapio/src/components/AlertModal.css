@@ -1,0 +1,28 @@
+/* AlertModal.css */
+.alert-modal {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    padding: 15px;
+    border-radius: 5px;
+    color: white;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    opacity: 0.9;
+    transition: opacity 0.3s ease;
+  }
+  
+  .alert-modal.info {
+    background-color: #2196F3; /* Azul */
+  }
+  
+  .alert-modal.success {
+    background-color: #4CAF50; /* Verde */
+  }
+  
+  .alert-modal.error {
+    background-color: #f44336; /* Vermelho */
+  }
+  
