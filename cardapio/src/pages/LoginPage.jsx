@@ -29,7 +29,7 @@ const LoginPage = () => {
         localStorage.setItem('access_token', session.access_token);
 
         // Redirecione para a página de mídia
-        navigate('/media');
+        navigate('/home');
       } else {
         setError(result.message || 'Login failed');
       }

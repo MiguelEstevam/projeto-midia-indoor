@@ -1,0 +1,12 @@
+.file-upload-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap; /* Evita que os elementos quebrem a linha */
+  }
+  
+  .file-upload-container input[type="file"],
+  .file-upload-container button {
+    flex-shrink: 0; /* Impede que o botão e o input reduzam de tamanho */
+  }
+  

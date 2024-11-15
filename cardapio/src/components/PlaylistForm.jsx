@@ -207,15 +207,16 @@ const PlaylistForm = ({ onAddPlaylist }) => {
 
   return (
     <div>
-      <Link to={isEditing ? '/playlists' : '/media'}>
+      <Link to={isEditing ? '/playlists' : '/home'}>
         <button className="go-back-btn">Voltar</button>
       </Link>
-      <br /><br />
-      <h2>{isEditing ? 'Editar Playlist' : 'Criar Nova Playlist'}</h2>
+      <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>{isEditing ? "Editar Playlist" : "Gerenciar Playlists"}</h1>
+      <h3>{isEditing ? '' : 'Criar Nova Playlist'}</h3>
       {error && <AlertModal message={error} type="Error" />}
       {successMessage && <AlertModal message={successMessage} type="Success" />}
       
       <form onSubmit={handleSubmit}>
+        <label>Nome:</label>
         <input
           type="text"
           placeholder="Nome da Playlist"
@@ -223,6 +224,7 @@ const PlaylistForm = ({ onAddPlaylist }) => {
           onChange={(e) => setPlaylistName(e.target.value)}
           required
         />
+        <label>Descrição:</label>
         <input
           type="text"
           placeholder="Descrição da Playlist"

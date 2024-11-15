@@ -130,7 +130,7 @@ const EditCardapio = () => {
             <Link to="/cardapios">
                 <button className="go-back-btn">Voltar</button>
             </Link>
-            <h1>Editar Cardápio</h1>
+            <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Editar Cardápio</h1>
             <label>Nome:</label>
             <input
                 type="text"

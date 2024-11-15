@@ -20,11 +20,11 @@ const CardapiosPage = () => {
         <div>
             {!isCreating ? (
                 <div>
-                    <Link to="/media">
+                    <Link to="/home">
                         <button className="go-back-btn">Voltar</button>
                     </Link>
-                    <br /><br />
-                    <h2>Gerenciar Cardápios</h2>
+                    <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Gerenciar cardápios</h1>
+                    <br />
                 </div>
             ) : (
                 <button className="go-back-btn" onClick={handleCancelCreate}>Voltar</button>

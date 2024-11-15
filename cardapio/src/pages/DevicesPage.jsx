@@ -124,9 +124,10 @@ const DevicesPage = () => {
 
     return (
         <div>
-            <Link to="/media">
+            <Link to="/home">
                 <button className="go-back-btn">Voltar</button>
             </Link>
+            <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>Gerenciar Dispositivos</h1>
             {(error || success) && (
                 <AlertModal
                     message={error || success}
@@ -138,7 +139,7 @@ const DevicesPage = () => {
                     }}
                 />
             )}
-            <br /><br />
+            <br />
             <AddDevice onAdd={handleAddDevice} />
             <br />
             <h3>Dispositivos Salvos:</h3>

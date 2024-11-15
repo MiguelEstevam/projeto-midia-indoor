@@ -49,7 +49,7 @@ const AddDevice = ({ onAdd }) => {
 
   return (
     <form onSubmit={handleSubmit}>
-      <h2>Adicionar Dispositivo</h2>
+      <h3>Adicionar Dispositivo</h3>
       {error && <p style={{ color: 'red' }}>{error}</p>}
       <input
         type="text"
