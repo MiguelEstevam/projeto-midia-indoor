@@ -40,7 +40,7 @@ const LoginPage = () => {
   };
 
   return (
-    <div id="root">
+    <div style={{ padding: '20px' }}>
       <h2>Mídia Indoor</h2>
       <form onSubmit={handleLogin}>
         <div>
