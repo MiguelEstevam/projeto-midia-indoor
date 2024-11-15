@@ -156,9 +156,24 @@ const FileList = () => {
   };
 
   const handleOpenModal = (fileId) => {
+    const file = files.find((f) => f.id === fileId);
+
+  if (file && ['mp4', 'webm', 'ogg'].includes(file.file_extension)) {
+    const videoElement = document.createElement('video');
+    videoElement.src = `${baseUrl}/${file.file_url}`;
+    
+    videoElement.addEventListener('loadedmetadata', () => {
+      setDuration(Math.ceil(videoElement.duration));
+      setSelectedFileId(fileId);
+      setShowModal(true);
+      fetchPlaylists();
+    });
+  } else {
+    setDuration(20);
     setSelectedFileId(fileId);
-    fetchPlaylists();
     setShowModal(true);
+    fetchPlaylists();
+  }
   };
 
   return (
