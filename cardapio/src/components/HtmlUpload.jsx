@@ -43,8 +43,8 @@ const HtmlUpload = () => {
       }
 
       setSuccess('HTML uploaded successfully!');
-      setTitle(''); // Limpar o título após o upload
-      setEditorData(''); // Limpar o conteúdo do editor após o upload
+      setTitle('');
+      setEditorData('');
     } catch (err) {
       setError(err.message);
     } finally {
@@ -54,7 +54,7 @@ const HtmlUpload = () => {
 
   return (
     <div className='ckeditor-container'>
-      <h2>Upload HTML</h2>
+      <h2>Upload de HTML</h2>
       <div>
         <label>Título:</label>
         <input

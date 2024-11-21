@@ -1,12 +1,34 @@
 .file-upload-container {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    white-space: nowrap; /* Evita que os elementos quebrem a linha */
-  }
-  
-  .file-upload-container input[type="file"],
-  .file-upload-container button {
-    flex-shrink: 0; /* Impede que o botão e o input reduzam de tamanho */
-  }
-  
+  display: flex;
+  flex-direction: column;
+
+}
+
+.input-cancel-container {
+  display: flex;
+  gap: 2%;
+}
+
+.input-file{
+  flex: 5;
+}
+
+.cancel-button {
+  flex: 1;
+  background-color: #f44336; /* Cor de fundo vermelha */
+  color: #fff; /* Texto branco */
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #d32f2f; /* Cor de fundo ao passar o mouse */
+}
+
+.cancel-button:disabled {
+  background-color: #e0e0e0;
+  color: #9e9e9e;
+  cursor: not-allowed;
+}

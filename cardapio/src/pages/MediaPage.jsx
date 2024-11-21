@@ -22,8 +22,7 @@ const MediaPage = () => {
             <h1 style={{ fontSize: '2rem', fontWeight: 'bold', color: '#225ABD' }}>{isContentListVisible ? "Gerenciar Conteúdos" : "Fazer Upload"}</h1>
             <br />
             <button onClick={handleToggleContent}>{isContentListVisible ? "Fazer upload" : "Gerenciar Conteúdos"}</button>
-            <br />
-            <br />
+            <br /><br /><br />
             <div
                 className="upload-container"
                 style={{
@@ -32,12 +31,11 @@ const MediaPage = () => {
                     color: '#633' // Escolha uma cor de fonte atraente
                 }}
             >
-                {/* colocar uma porra de titulo aqui */}
+                <FileUpload />
+                <br /><br />
                 <div className="main-container">
                     <HtmlUpload />
                 </div>
-                <br />
-                <FileUpload />
             </div>
 
             <div className="content-list-container" style={{ display: isContentListVisible ? 'block' : 'none' }}>
